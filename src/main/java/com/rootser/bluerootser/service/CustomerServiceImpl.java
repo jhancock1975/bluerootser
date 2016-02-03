@@ -19,13 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	@Cacheable("customers")
 	public List<Customer> findAll(String userId, String password) {
-		Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 		CustomerPK pk = new CustomerPK();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			logger.debug("caught interrupted exception while waiting ", e);
-		}
 		pk.setUserid("john");
 		pk.setPassword("test1");
 		return  (List<Customer>) customerRepository.findAll(Arrays.asList(pk));
