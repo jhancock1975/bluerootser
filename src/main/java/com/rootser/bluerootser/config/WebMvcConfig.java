@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.rootser.bluerootser.aspect.LoggingAspect;
+import com.rootser.bluerootser.repository.CustomerRepository;
  
 @Configuration
 @EnableWebMvc
@@ -34,5 +35,4 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     	return new LoggingAspect();
     }
     
- 
 }
