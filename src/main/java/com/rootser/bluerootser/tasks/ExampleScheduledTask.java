@@ -14,7 +14,7 @@ public class ExampleScheduledTask {
 	@Autowired
 	CustomerService custService;
 	
-	@Scheduled(cron="*/1 * * * * *")
+	@Scheduled(cron="* */1 * * * *")
 	public void printCustomers(){
 		logger.debug(custService.findAll("john", "test1").toString());
 	}
