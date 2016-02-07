@@ -8,11 +8,15 @@
 	<button type="button" class="btn btn-default" ng-click="save()">Save</button>
 	<button class="btn btn-primary" ng-click="clear()">Clear</button>
 	Number of characters left: <span ng-bind="left()"></span>
+	<form action="/logout" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" value="Sign Out"/>
+    </form>
 	<script
 		src="<c:url value="/resources/javascript/bower_components/angular/angular.js" />"></script>
-		<script
+	<script
 		src="<c:url value="/resources/javascript/bower_components/angular-bootstrap/ui-bootstrap.js" />"></script>
 	<script src="<c:url value="/resources/javascript/app/app.js" />"></script>
-	 <link href="<c:url value="/resources/javascript/bower_components/bootstrap/dist/css/bootstrap.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/javascript/bower_components/bootstrap/dist/css/bootstrap.css" />" rel="stylesheet">
 </body>
 </html>
