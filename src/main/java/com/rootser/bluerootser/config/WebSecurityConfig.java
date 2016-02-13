@@ -26,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
                 .permitAll();
     }
+    
     //configAuthentication taken from
     //http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
     
