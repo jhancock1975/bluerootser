@@ -1,31 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
+<%@ include file="/jspfrag/bootstrap-head-elements.jspf"%>
+
+<link href="<c:url value="/resources/css/signin.css" />" rel="stylesheet">
+
+<title>Blue Rootser - Please Login</title>
+</head>
+<body>
+
+    <div class="container">
+
+      <form class="form-signin" action="/login" method="post">
+      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        
-        <sec:authorize access="hasRole('users')">
-        <h1>You are in the user role</h1>
-        </sec:authorize>
-        
-        
-        <form action="/login" method="post">
-        	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+	<%@ include file="/jspfrag/common-footer.jspf"%>
+</body>
 </html>

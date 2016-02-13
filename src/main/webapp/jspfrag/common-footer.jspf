@@ -1,0 +1,2 @@
+<%@taglib prefix="c" uri="http://www.springframework.org/tags"%>
+<script src="<c:url value="/resources/javascript/ie10-viewport-bug-workaround.js" />"></script>
