@@ -1,6 +1,6 @@
 <%@ include file="/jspfrag/bootstrap-head-elements.jspf"%>
 
-<link href="<c:url value="/resources/css/signin.css" />" rel="stylesheet">
+<link href="/resources/css/signin.css" rel="stylesheet">
 
 <title>Blue Rootser - Please Login</title>
 </head>
