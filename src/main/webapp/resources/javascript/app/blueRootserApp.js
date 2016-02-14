@@ -6,12 +6,12 @@ var blueRootserApp = angular.module('blueRootserApp', [ 'ui.bootstrap',
 		'ngRoute' ]);
 
 //configure our routes
-blueRootserApp.config(function($routeProvider) {
+blueRootserApp.config(function($routeProvider,  $httpProvider) {
     $routeProvider
 
         // route for the home page
         .when('/', {
-            templateUrl : '/',
+            templateUrl : '/home',
             controller  : 'mainController'
         })
 
@@ -26,6 +26,9 @@ blueRootserApp.config(function($routeProvider) {
             templateUrl : 'pages/contact.html',
             controller  : 'contactController'
         });
+
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+
 });
 
 // create the controller and inject Angular's $scope
