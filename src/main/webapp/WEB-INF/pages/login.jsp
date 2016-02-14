@@ -5,10 +5,8 @@
 
 <title>Blue Rootser - Please Login</title>
 </head>
-<body class="site-body">
-
-    <div class="container">
-
+<body >
+<div class="container">
       <form class="form-signin" action="/login" method="post">
       	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <h2 class="form-signin-heading">Please sign in</h2>
