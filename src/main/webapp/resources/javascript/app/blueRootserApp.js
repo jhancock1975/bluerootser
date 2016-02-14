@@ -23,10 +23,11 @@ blueRootserApp.config(function($routeProvider,  $httpProvider) {
 
         // route for the contact page
         .when('/myArticles', {
-            templateUrl : 'pages/contact.html',
-            controller  : 'contactController'
+            templateUrl : '/myArticles',
+            controller  : 'myArticlesController'
         });
 
+    //for csrf token
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
 });
@@ -41,6 +42,6 @@ blueRootserApp.controller('loginController', function($scope) {
     $scope.message = 'Look! I am the login page.';
 });
 
-blueRootserApp.controller('contactController', function($scope) {
+blueRootserApp.controller('myArticlesController', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
 });
