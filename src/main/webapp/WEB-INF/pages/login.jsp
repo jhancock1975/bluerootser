@@ -1,11 +1,13 @@
+<%@taglib prefix="c" uri="http://www.springframework.org/tags"%>
 <%@ include file="/jspfrag/bootstrap-head-elements.jspf"%>
 
 <link href="/resources/css/signin.css" rel="stylesheet">
 
 <title>Blue Rootser - Please Login</title>
 </head>
-<body>
+<body class="site-body">
 
+	<img class="banner" src="<c:url value="/resources/images/blue-rootser-banner.png" />" alt="blue rootser chinese reading"/>
     <div class="container">
 
       <form class="form-signin" action="/login" method="post">
@@ -24,6 +26,7 @@
       </form>
 
     </div> <!-- /container -->
+    
 	<%@ include file="/jspfrag/common-footer.jspf"%>
 </body>
 </html>

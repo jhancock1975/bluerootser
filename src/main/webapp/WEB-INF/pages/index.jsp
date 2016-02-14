@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html ng-app="blueRootserApp">
 <head>
 <%@ include file="/jspfrag/bootstrap-head-elements.jspf"%>
 
+<script language='JavaScript' src="<c:url value="/resources/javascript/bower_components/angular-route/angular-route.js" />" ></script>
+<script language='JavaScript' src="<c:url value="/resources/javascript/app/blueRootserApp.js" />" ></script>
 <link href="<c:url value="/resources/css/logo-nav.css" />" rel="stylesheet">
 
 <title>Blue Rootser 讀漢語 - read Chinese </title>
 
 </head>
-<body>
+<body ng-controller="mainController">
  <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -23,21 +25,20 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                	<img src="http://placehold.it/150x50&text=Logo" alt="">
-                    <!-- <img src='<c:url value="/resources/images/blue-rootser-square-banner.png"/>'>  -->
+                    <img src='<c:url value="/resources/images/blue-rootser-banner.png"/>'>
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#login">Login</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="#myArticles">My Articles</a>
                     </li>
                 </ul>
             </div>
@@ -49,16 +50,17 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <h1>Logo Nav by Start Bootstrap</h1>
-                <p>Note: You may need to adjust some CSS based on the size of your logo. The default logo size is 150x50 pixels.</p>
+            <div id="main" class="col-lg-12">
+                <h1>Boost Your Chinese Reading</h1>
+                <p>The latest articles are below.  Highlight text to look up in Wiktionary</p>
+                <div ng-view>{{message}}</div>
             </div>
         </div>
     </div>
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="<c:url value="/resources/javascript/bower_components/jquery/src/jquery.js" />" ></script>
+    <script src="<c:url value="/resources/javascript/bower_components/jquery/dist/jquery.js" />" ></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<c:url value="/resources/javascript/bower_components/bootstrap/dist/js/bootstrap.js" />" ></script>

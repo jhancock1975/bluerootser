@@ -1,7 +1,7 @@
 /**
  * 
  */
-var app = angular.module('store', ['ui.bootstrap']);
+var app = angular.module('store', ['ui.bootstrap', 'ng-route']);
 app.controller("StoreController", function($scope) {
     $scope.message = "";
     $scope.left  = function() {return 100 - $scope.message.length;};
