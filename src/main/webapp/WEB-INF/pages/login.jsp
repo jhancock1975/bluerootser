@@ -7,7 +7,6 @@
 </head>
 <body class="site-body">
 
-	<img class="banner" src="<c:url value="/resources/images/blue-rootser-banner.png" />" alt="blue rootser chinese reading"/>
     <div class="container">
 
       <form class="form-signin" action="/login" method="post">
