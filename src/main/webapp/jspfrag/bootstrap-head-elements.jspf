@@ -11,6 +11,7 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <link href="<c:url value="/resources/javascript/bower_components/bootstrap/dist/css/bootstrap.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/site.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/logo-nav.css" />" rel="stylesheet">
 <!--  
 	angular includes
 	consider moving to footer with ng-cloak or ng-bind to not block rendering of html

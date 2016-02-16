@@ -6,7 +6,7 @@ var blueRootserApp = angular.module('blueRootserApp', [ 'ui.bootstrap',
 		'ngRoute' ]);
 
 //configure our routes
-blueRootserApp.config(function($routeProvider,  $httpProvider) {
+blueRootserApp.config(function($routeProvider) {
     $routeProvider
 
         // route for the home page
@@ -15,20 +15,24 @@ blueRootserApp.config(function($routeProvider,  $httpProvider) {
             controller  : 'mainController'
         })
 
-        // route for the about page
+        // route for the login page
         .when('/login', {        	
             templateUrl : '/login',
             controller  : 'loginController'
         })
-
+        
+        // route for the logout page
+        .when('/logout', {        	
+            templateUrl : '/login',
+            controller  : 'logoutController'
+        })
+        
         // route for the contact page
         .when('/myArticles', {
             templateUrl : '/myArticles',
             controller  : 'myArticlesController'
         });
 
-    //for csrf token
-    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
 });
 
@@ -44,4 +48,20 @@ blueRootserApp.controller('loginController', function($scope) {
 
 blueRootserApp.controller('myArticlesController', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
+});
+
+blueRootserApp.controller('logoutController', function($scope, $http) {
+    console.log("logout controller ");
+    console.log("$scope= " + $scope + "token name " + csrfTokenName + " token value " + csrfToken);
+    $http.defaults.headers.post['X-CSRF-TOKEN']=csrfToken;
+    $http.post("/logout", data)
+    	
+    	.success( function(data, status, headers, config){
+    		console.log("logout success");
+    	})
+    	.error(function(data, status, headers, config){
+    		console.log("logout error");
+    		console.log(status);
+    		console.log(data);
+    	});
 });

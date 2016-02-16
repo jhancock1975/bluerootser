@@ -4,6 +4,10 @@
 <link href="/resources/css/signin.css" rel="stylesheet">
 
 <title>Blue Rootser - Please Login</title>
+<script language='JavaScript'>
+	csrfTokenName="${_csrf.parameterName}";
+	csrfToken="${_csrf.token}";
+</script>
 </head>
 <body >
 <div class="container">
@@ -11,7 +15,7 @@
       	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="text" name="username" id="inputEmail" class="form-control" placeholder="E-mail address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">

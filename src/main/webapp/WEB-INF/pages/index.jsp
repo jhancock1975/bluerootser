@@ -7,12 +7,14 @@
 
 <script language='JavaScript' src="<c:url value="/resources/javascript/bower_components/angular-route/angular-route.js" />" ></script>
 <script language='JavaScript' src="<c:url value="/resources/javascript/app/blueRootserApp.js" />" ></script>
-<link href="<c:url value="/resources/css/logo-nav.css" />" rel="stylesheet">
-
+<script language='JavaScript'>
+	var csrfTokenName="${_csrf.parameterName}";
+	var csrfToken="${_csrf.token}";
+</script>
 <title>Blue Rootser 讀漢語 - read Chinese </title>
 
 </head>
-<body ng-controller="mainController">
+<body ng-controller="mainController" ng-cloak>
  <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -34,9 +36,16 @@
                     <li>
                         <a href="#">Home</a>
                     </li>
+                    <sec:authorize access="isAuthenticated()">
                     <li>
-                        <a href="#login">Login</a>
+      					<a href="#logout">Log Out</a>
                     </li>
+                    </sec:authorize>
+					<sec:authorize access="!isAuthenticated()">
+                    <li>
+                        <a href="#login">Log In</a>
+                    </li>
+                    </sec:authorize>
                     <li>
                         <a href="#myArticles">My Articles</a>
                     </li>
@@ -50,10 +59,11 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <div id="main" class="col-lg-12">
+            <div id="main" class="col-lg-12" >
                 <h1>Boost Your Chinese Reading</h1>
                 <p>The latest articles are below.  Highlight text to look up in Wiktionary</p>
-                <div ng-view>{{message}}</div>
+                <!-- trying second ng cloak here because I see flicker after clicking navbar -->
+                <div ng-view ng-cloak>{{message}}</div>
             </div>
         </div>
     </div>
