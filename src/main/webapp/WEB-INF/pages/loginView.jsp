@@ -9,7 +9,7 @@
 <body >
 	
 	<div class="container">
-	<h2 class="form-signin-heading">Didn't mean to sign out?  Sign back in!</h2>
+	<h2 class="form-signin-heading">Please sign in</h2>
 		<%@ include file="/jspfrag/login-form.jspf"%>
     </div> <!-- /container -->
 	

@@ -23,6 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .and()
+            .formLogin()
+                .loginPage("/loginView")
+                .permitAll()
+                .and()
             .logout()
                 .permitAll();
     }

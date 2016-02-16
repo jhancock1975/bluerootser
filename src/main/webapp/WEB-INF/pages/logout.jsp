@@ -4,13 +4,12 @@
         <title>Spring Security Example</title>
     </head>
     <body>
-        <h1>Welcome!</h1>
-		 
-		<sec:authorize access="hasRole('ROLE_USER')">
-        <h1>You are in the user role</h1>
-        </sec:authorize>
-        
-        <p>Click <a href="/hello">here</a> to see a greeting.</p>
+        <h1>Are you sure you want to log out?</h1>
+
+	<form action="/logout" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="submit" value="Sign Out"/>
+    </form>
     
 	<%@ include file="/jspfrag/common-footer.jspf"%>
     </body>

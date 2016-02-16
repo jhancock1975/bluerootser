@@ -7,10 +7,7 @@
 
 <script language='JavaScript' src="<c:url value="/resources/javascript/bower_components/angular-route/angular-route.js" />" ></script>
 <script language='JavaScript' src="<c:url value="/resources/javascript/app/blueRootserApp.js" />" ></script>
-<script language='JavaScript'>
-	var csrfTokenName="${_csrf.parameterName}";
-	var csrfToken="${_csrf.token}";
-</script>
+
 <title>Blue Rootser 讀漢語 - read Chinese </title>
 
 </head>
@@ -38,8 +35,11 @@
                     </li>
                     <sec:authorize access="isAuthenticated()">
                     <li>
-      					<a href="#logout">Log Out</a>
-                    </li>
+      					<form action="/logout" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<input type="submit" value="Sign Out" />
+						</form>
+					</li>
                     </sec:authorize>
 					<sec:authorize access="!isAuthenticated()">
                     <li>

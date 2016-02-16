@@ -17,15 +17,10 @@ blueRootserApp.config(function($routeProvider) {
 
         // route for the login page
         .when('/login', {        	
-            templateUrl : '/login',
+            templateUrl : '/loginView',
             controller  : 'loginController'
         })
         
-        // route for the logout page
-        .when('/logout', {        	
-            templateUrl : '/login',
-            controller  : 'logoutController'
-        })
         
         // route for the contact page
         .when('/myArticles', {
@@ -48,20 +43,4 @@ blueRootserApp.controller('loginController', function($scope) {
 
 blueRootserApp.controller('myArticlesController', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-blueRootserApp.controller('logoutController', function($scope, $http) {
-    console.log("logout controller ");
-    console.log("$scope= " + $scope + "token name " + csrfTokenName + " token value " + csrfToken);
-    $http.defaults.headers.post['X-CSRF-TOKEN']=csrfToken;
-    $http.post("/logout", data)
-    	
-    	.success( function(data, status, headers, config){
-    		console.log("logout success");
-    	})
-    	.error(function(data, status, headers, config){
-    		console.log("logout error");
-    		console.log(status);
-    		console.log(data);
-    	});
 });
