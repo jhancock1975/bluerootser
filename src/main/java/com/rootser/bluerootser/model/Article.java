@@ -1,8 +1,8 @@
 package com.rootser.bluerootser.model;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
 
-@Component
+@Entity
 public class Article {
 	public String url;
 	public String text;
