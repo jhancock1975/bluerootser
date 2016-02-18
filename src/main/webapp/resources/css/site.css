@@ -18,3 +18,7 @@
      font: inherit;
      cursor: pointer;
 }
+
+.logout-button:hover {
+	color:#FFFFFF;
+}
