@@ -1,11 +1,15 @@
 package com.rootser.bluerootser.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="articles")
 public class Article {
-	public String url;
-	public String text;
+	@Id private Long id;
+	private String url;
+	private String text;
 	public String getUrl() {
 		return url;
 	}
