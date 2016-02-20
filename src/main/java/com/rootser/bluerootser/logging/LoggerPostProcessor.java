@@ -27,7 +27,7 @@ public class LoggerPostProcessor implements BeanPostProcessor {
 
 	                logger.debug("Attempting to inject a SLF4J logger on bean: " + bean.getClass());
 
-	                if (field != null && (field.getModifiers() & Modifier.STATIC) == 0) {
+	                if (field != null && (field.getModifiers() & Modifier.STATIC) == Modifier.STATIC) {
 	                    field.setAccessible(true);
 	                    try {
 	                        field.set(bean, LoggerFactory.getLogger(bean.getClass()));
