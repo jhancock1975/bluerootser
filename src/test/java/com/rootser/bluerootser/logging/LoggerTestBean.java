@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoggerTestBean {
-	public static @InjectLogger Logger LOGGER;
+	private static @InjectLogger Logger LOGGER;
+	
+	public void logSomething() {
+		LOGGER.debug("logging test");
+	}
 
 }

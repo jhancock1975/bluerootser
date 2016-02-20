@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="ci" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="blueRootserApp">
 <head>
@@ -63,7 +64,15 @@
                 <h1>Boost Your Chinese Reading</h1>
                 <p>The latest articles are below.  Highlight text to look up in Wiktionary</p>
                 <!-- trying second ng cloak here because I see flicker after clicking navbar -->
-                <div ng-view ng-cloak>{{message}}</div>
+                <div ng-view ng-cloak>{{message}}
+                	<table>
+                	<ci:forEach var="url" items="${urls}">
+				    <tr>
+				        <td><ci:out value="${url}"/></td>
+				    </tr>
+					</ci:forEach>
+					</table>
+                </div>
             </div>
         </div>
     </div>
