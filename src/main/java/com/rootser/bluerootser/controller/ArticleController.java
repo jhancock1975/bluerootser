@@ -18,7 +18,7 @@ public class ArticleController {
 	@Autowired
 	private ArticleFetchSvc fetchSvc;
 
-	@RequestMapping(value = Constants.articles, method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = Constants.articles, method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	@ResponseBody String getArticles() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
@@ -29,7 +29,6 @@ public class ArticleController {
 		for (Article article: articles){
 			result.append(article.getText());
 		}
-		return "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head><body>" 
-			+ result.toString() + "</body></html>";
+		return result.toString();
 	}
 }

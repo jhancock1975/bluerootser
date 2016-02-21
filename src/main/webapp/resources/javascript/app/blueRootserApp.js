@@ -32,9 +32,18 @@ blueRootserApp.config(function($routeProvider) {
 });
 
 // create the controller and inject Angular's $scope
-blueRootserApp.controller('mainController', function($scope) {
+blueRootserApp.controller('mainController', function($scope, $http) {
     // create a message to display in our view
     $scope.message = 'Everyone come and see how good I look!';
+    var data = {};
+    $http.post("/articles", data).success(function(scope, data, headers, config)	{
+    	console.log('success');
+    	$scope.message = data;
+    }).error(function(scope, data, headers, config){
+    	console.log('error');
+    	console.log(data);
+    });
+    
 });
 
 blueRootserApp.controller('loginController', function($scope) {
