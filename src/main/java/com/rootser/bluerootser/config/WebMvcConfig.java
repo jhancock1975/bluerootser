@@ -1,5 +1,6 @@
 package com.rootser.bluerootser.config;
 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -15,6 +16,7 @@ import com.rootser.bluerootser.aspect.LoggingAspect;
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
+@EnableCaching
 public class WebMvcConfig extends WebMvcConfigurerAdapter{
  
     @Override
