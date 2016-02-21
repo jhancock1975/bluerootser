@@ -19,7 +19,7 @@ public class ArticleFetchSvcImplTest {
 	private ArticleFetchSvcImpl articleSvc;
 	@Test
 	public void testGetArticles() {
-		List<Article> articles = articleSvc.getArticles(1 ,"http://www.cna.com.tw/", "/news/");
+		List<Article> articles = articleSvc.getArticles(1 ,"http://www.cna.com.tw/", "/news/", "section[itemprop=articleBody]");
 		assertTrue(articles.size() == 1);
 	}
 

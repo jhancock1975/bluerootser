@@ -3,7 +3,7 @@
  */
 // create the module and name it blueRootserApp
 var blueRootserApp = angular.module('blueRootserApp', [ 'ui.bootstrap',
-		'ngRoute' ]);
+		'ngRoute','ngSanitize']);
 
 //configure our routes
 blueRootserApp.config(function($routeProvider) {

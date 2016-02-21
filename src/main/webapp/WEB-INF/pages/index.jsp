@@ -7,6 +7,7 @@
 <%@ include file="/jspfrag/bootstrap-head-elements.jspf"%>
 
 <script language='JavaScript' src="<c:url value="/resources/javascript/bower_components/angular-route/angular-route.js" />" ></script>
+<script language='JavaScript' src="<c:url value="/resources/javascript/bower_components/angular-sanitize/angular-sanitize.js" />" ></script>
 <script language='JavaScript' src="<c:url value="/resources/javascript/app/blueRootserApp.js" />" ></script>
 <!-- jQuery -->
     <script src="<c:url value="/resources/javascript/bower_components/jquery/dist/jquery.js" />" ></script>
@@ -14,6 +15,7 @@
 
 </head>
 <body ng-controller="mainController" ng-cloak>
+
  <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -63,12 +65,10 @@
         <div class="row">
             <div id="main" class="col-lg-12" >
                 <h1>Boost Your Chinese Reading</h1>
-                <p>The latest articles are below.  Highlight text to look up in Wiktionary</p>
-                	<ci:forEach var="article" items="${articles}">
-                	<div id="article"><script>$("#article").html("<ci:out value="${article.text}"/>").text();</script></div>
-					</ci:forEach>
+                <p>The latest articles are below.  Highlight text to look up in Wiktionary</p>                	
                 <!-- trying second ng cloak here because I see flicker after clicking navbar -->
                 <div ng-view ng-cloak>{{message}}
+                		<div id="articleDiv" ng-bind-html="articleText" ></div>
                 </div>
             </div>
         </div>

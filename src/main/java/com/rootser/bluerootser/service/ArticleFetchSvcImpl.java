@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.rootser.bluerootser.logging.InjectLogger;
@@ -20,7 +21,8 @@ public class ArticleFetchSvcImpl implements ArticleFetchSvc {
 	public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.97 Safari/537.36";
 	
 	@Override
-	public List<Article> getArticles(int numArticles, String baseUrl, String urlPattern ){
+	@Cacheable("articles")
+	public List<Article> getArticles(int numArticles, String baseUrl, String urlPattern, String tagSelector ){
 		List<Article> result = new ArrayList<Article>();
 		try {
 			List<String> urls = getArticleUrls(numArticles, baseUrl, urlPattern);
@@ -28,7 +30,7 @@ public class ArticleFetchSvcImpl implements ArticleFetchSvc {
 			for (String url: urls){
 				logger.debug(url);
 				Document articleDoc = Jsoup.connect(url).userAgent(USER_AGENT).get();
-				result.add(new Article(url, articleDoc.html()));
+				result.add(new Article(url, articleDoc.select(tagSelector).html()));
 				if (++count > numArticles){
 					break;
 				}
@@ -40,6 +42,7 @@ public class ArticleFetchSvcImpl implements ArticleFetchSvc {
 	}
 
 	@Override
+	@Cacheable("urls")
 	public List<String> getArticleUrls(int numArticles, String baseUrl, String urlPattern) {
 		List<String> result = new ArrayList<String>();
 		try {
