@@ -8,7 +8,8 @@
 
 <script language='JavaScript' src="<c:url value="/resources/javascript/bower_components/angular-route/angular-route.js" />" ></script>
 <script language='JavaScript' src="<c:url value="/resources/javascript/app/blueRootserApp.js" />" ></script>
-
+<!-- jQuery -->
+    <script src="<c:url value="/resources/javascript/bower_components/jquery/dist/jquery.js" />" ></script>
 <title>Blue Rootser 讀漢語 - read Chinese </title>
 
 </head>
@@ -63,25 +64,22 @@
             <div id="main" class="col-lg-12" >
                 <h1>Boost Your Chinese Reading</h1>
                 <p>The latest articles are below.  Highlight text to look up in Wiktionary</p>
+                	<ci:forEach var="article" items="${articles}">
+                	<div id="article"><script>$("#article").html("<ci:out value="${article.text}"/>").text();</script></div>
+					</ci:forEach>
                 <!-- trying second ng cloak here because I see flicker after clicking navbar -->
                 <div ng-view ng-cloak>{{message}}
-                	<table>
-                	<ci:forEach var="url" items="${urls}">
-				    <tr>
-				        <td><ci:out value="${url}"/></td>
-				    </tr>
-					</ci:forEach>
-					</table>
                 </div>
             </div>
         </div>
     </div>
     <!-- /.container -->
 
-    <!-- jQuery -->
-    <script src="<c:url value="/resources/javascript/bower_components/jquery/dist/jquery.js" />" ></script>
-
+    
+	
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="<c:url value="/resources/javascript/bower_components/bootstrap/dist/js/bootstrap.js" />" ></script>
+
 </body>
 </html>
