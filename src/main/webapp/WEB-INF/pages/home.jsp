@@ -11,7 +11,7 @@
         </sec:authorize>
         
         <p>Click <a href="/hello">here</a> to see a greeting.</p>
-    	<div id="articleDiv" ng-controller="mainController" ng-bind-html="artcileHtml"></div>
+    	<div id="articleDiv" ng-controller="mainController" ng-bind-html="artcileHtml" on-select="vm.handler(selection);"></div>
 	<%@ include file="/jspfrag/common-footer.jspf"%>
     </body>
 </html>

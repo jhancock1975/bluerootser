@@ -19,6 +19,7 @@
 -->
 <script	src="<c:url value="/resources/javascript/bower_components/angular/angular.js" />"></script>
 <script	src="<c:url value="/resources/javascript/bower_components/angular-bootstrap/ui-bootstrap.js" />"></script>
+<script	src="<c:url value="/resources/javascript/bower_components/angular-onselect/dist/angular-onselect.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/app.js" />"></script>
 
 <meta name="description" content="chinese reading system">

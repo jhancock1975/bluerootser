@@ -3,7 +3,7 @@
  */
 // create the module and name it blueRootserApp
 var blueRootserApp = angular.module('blueRootserApp', [ 'ui.bootstrap',
-		'ngRoute','ngSanitize']);
+		'ngRoute','ngSanitize', 'onSelect']);
 
 //configure our routes
 blueRootserApp.config(function($routeProvider) {
@@ -45,6 +45,15 @@ blueRootserApp.controller('mainController', function($scope, $http) {
     	console.log("data = " + data);
     	console.log("scope.message = " + scope.message)
     });
+    
+    var vm = this;
+    vm.handler = handler;
+ 
+    function handler(selection) {
+      setTimeout(function() {
+        selection.removeHighlight();
+      }, 2000);
+    };
     
 });
 
