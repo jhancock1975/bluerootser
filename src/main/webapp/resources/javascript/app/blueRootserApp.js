@@ -32,14 +32,14 @@ blueRootserApp.config(function($routeProvider) {
 });
 
 // create the controller and inject Angular's $scope
-blueRootserApp.controller('mainController', function($scope, $http, $sce) {
+blueRootserApp.controller('mainController', function($scope, $http) {
     // create a message to display in our view
     $scope.message = 'Everyone come and see how good I look!';
     var data = {};
     $http.defaults.headers.post['X-CSRF-TOKEN'] = csrfTokenVal;
     result = $http.post("/articles", data).success(function(data, status, headers, config)	{
     	console.log('success');
-    	$scope.artcileHtml = $sce.trustAsHtml(data).toString();
+    	$scope.artcileHtml =  data;
     }).error(function(data, status, headers, config){
     	console.log('error');
     	console.log("data = " + data);
