@@ -3,7 +3,7 @@
  */
 //create the module and name it blueRootserApp
 var blueRootserApp = angular.module('blueRootserApp', [ 'ui.bootstrap',
-                                                        'ngRoute','ngSanitize', 'onSelect']);
+                                                        'ngRoute','ngSanitize']);
 
 //configure our routes
 blueRootserApp.config(function($routeProvider) {
@@ -94,16 +94,20 @@ function getMousePosition(e)
         lixlpixel_tooltip.style.top = (mousey+pagey+offsety) + 'px';
     }
 }
-function tooltip(tip)
+function tooltip(tip, element)
 {
     if(!document.getElementById('tooltip')) newelement('tooltip');
     var lixlpixel_tooltip = document.getElementById('tooltip');
     lixlpixel_tooltip.innerHTML = tip;
     lixlpixel_tooltip.style.display = 'block';
+    element.on("mousemove", function(event){
+		getMousePosition(event);
+	});
 }
-function exit()
+function exit(element)
 {
     document.getElementById('tooltip').style.display = 'none';
+    element.on("mousemove", null);
 }
 
 blueRootserApp.directive("highlight", function() {
@@ -117,14 +121,14 @@ blueRootserApp.directive("highlight", function() {
 				text = document.selection.createRange().text;
 			}
 			console.log(text);
-			tooltip(text);
+			if (! isBlank(text)){
+				tooltip(text, element);
+			}
 		});
 		element.on("mousedown", function(event){
-			exit();
+			exit(element);
 		});
-		element.on("mousemove", function(event){
-			getMousePosition(event);
-		});
+		
 	}
 });
 
