@@ -10,7 +10,6 @@
         <h1>You are in the user role</h1>
         </sec:authorize>
         
-        <p>Click <a href="/hello">here</a> to see a greeting.</p>
     	<div id="articleDiv" ng-controller="mainController" ng-bind-html="artcileHtml" highlight class="tip"></div>
 	<%@ include file="/jspfrag/common-footer.jspf"%>
     </body>

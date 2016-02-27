@@ -94,10 +94,28 @@ function getMousePosition(e){
     }
 }
 
-function tooltip(tip, element){
+function lookup(str, $http){
+	wikiUrl = "https://en.wiktionary.org/w/api.php?format=xml&action=query&titles=" +
+	encodeURI(str) +
+	"&rvprop=content&prop=revisions&redirects=1";
+	var result = "";
+	 
+	$http({
+	        method : "GET",
+	        url : wikiUrl
+	    }).then(function mySucces(response) {
+	        result = response.data;
+	    }, function myError(response) {
+	        result = response.statusText;
+	    });
+	 
+	return result; 
+}
+function tooltip(tip, element, $http){
+	definitionText = lookup(tip, $http);
     if(!document.getElementById('tooltip')) newelement('tooltip');
     var lixlpixel_tooltip = document.getElementById('tooltip');
-    lixlpixel_tooltip.innerHTML = tip;
+    lixlpixel_tooltip.innerHTML = definitionText;
     lixlpixel_tooltip.style.display = 'block';
     element.on("mousemove", function(event){
 		getMousePosition(event);
@@ -109,7 +127,7 @@ function exit(element){
     element.on("mousemove", null);
 }
 
-blueRootserApp.directive("highlight", function() {
+blueRootserApp.directive("highlight", ['$http', function($http) {
 	return function(scope, element, attrs) {
 		element.on('mouseup', function(event) {
 			console.log("mouse up");
@@ -121,7 +139,7 @@ blueRootserApp.directive("highlight", function() {
 			}
 			console.log(text);
 			if (! isBlank(text)){
-				tooltip(text, element);
+				tooltip(text, element, $http);
 			}
 		});
 		element.on("mousedown", function(event){
@@ -129,7 +147,7 @@ blueRootserApp.directive("highlight", function() {
 		});
 		
 	}
-});
+}]);
 
 blueRootserApp.controller('loginController', function($scope) {
 	$scope.message = 'Look! I am the login page.';
