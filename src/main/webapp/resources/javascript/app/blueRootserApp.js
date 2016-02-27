@@ -77,7 +77,7 @@ var ie5 = (document.getElementById && document.all);
 var ns6 = (document.getElementById && !document.all);
 var ua = navigator.userAgent.toLowerCase();
 var isapple = (ua.indexOf('applewebkit') != -1 ? 1 : 0);
-function getmouseposition(e)
+function getMousePosition(e)
 {
     if(document.getElementById)
     {
@@ -100,7 +100,6 @@ function tooltip(tip)
     var lixlpixel_tooltip = document.getElementById('tooltip');
     lixlpixel_tooltip.innerHTML = tip;
     lixlpixel_tooltip.style.display = 'block';
-    document.onmousemove = getmouseposition;
 }
 function exit()
 {
@@ -120,8 +119,11 @@ blueRootserApp.directive("highlight", function() {
 			console.log(text);
 			tooltip(text);
 		});
-		element.ont("mousedown", function(event){
+		element.on("mousedown", function(event){
 			exit();
+		});
+		element.on("mousemove", function(event){
+			getMousePosition(event);
 		});
 	}
 });
