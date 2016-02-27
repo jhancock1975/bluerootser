@@ -85,7 +85,7 @@ function getmouseposition(e)
         	document.compatMode != 'BackCompat') ?
         		document.documentElement : document.body;
         pagex = (isapple == 1 ? 0:(ie5)?iebody.scrollLeft:window.pageXOffset);
-        pagey = (isapple == 1 ? 0:(ie5)?iebody.scrollTop:window.pageYOffset);
+        pagey = (isapple == window.scrollY ? 0:(ie5)?iebody.scrollTop:window.pageYOffset);
         mousex = (ie5)?event.x:(ns6)?clientX = e.clientX:false;
         mousey = (ie5)?event.y:(ns6)?clientY = e.clientY:false;
 
