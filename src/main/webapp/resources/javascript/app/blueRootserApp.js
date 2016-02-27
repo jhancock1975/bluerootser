@@ -58,8 +58,7 @@ blueRootserApp.controller('mainController', function($scope, $http) {
 var offsetx = 12;
 var offsety =  8;
 
-function newelement(newid)
-{
+function newelement(newid){
     if(document.createElement)
     {
         var el = document.createElement('div');
@@ -73,14 +72,14 @@ function newelement(newid)
         document.body.appendChild(el);
     }
 }
+
 var ie5 = (document.getElementById && document.all);
 var ns6 = (document.getElementById && !document.all);
 var ua = navigator.userAgent.toLowerCase();
 var isapple = (ua.indexOf('applewebkit') != -1 ? 1 : 0);
-function getMousePosition(e)
-{
-    if(document.getElementById)
-    {
+
+function getMousePosition(e){
+    if(document.getElementById) {
         var iebody=(document.compatMode &&
         	document.compatMode != 'BackCompat') ?
         		document.documentElement : document.body;
@@ -94,8 +93,8 @@ function getMousePosition(e)
         lixlpixel_tooltip.style.top = (mousey+pagey+offsety) + 'px';
     }
 }
-function tooltip(tip, element)
-{
+
+function tooltip(tip, element){
     if(!document.getElementById('tooltip')) newelement('tooltip');
     var lixlpixel_tooltip = document.getElementById('tooltip');
     lixlpixel_tooltip.innerHTML = tip;
@@ -104,8 +103,8 @@ function tooltip(tip, element)
 		getMousePosition(event);
 	});
 }
-function exit(element)
-{
+
+function exit(element){
     document.getElementById('tooltip').style.display = 'none';
     element.on("mousemove", null);
 }
