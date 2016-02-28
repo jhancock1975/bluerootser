@@ -2,7 +2,7 @@
  * 
  */
 //create the module and name it blueRootserApp
-var blueRootserApp = angular.module('blueRootserApp', [ 'ui.bootstrap',
+var blueRootserApp = angular.module('blueRootserApp', [ 'ui.bootstrap', 
                                                         'ngRoute','ngSanitize']);
 
 //configure our routes
@@ -27,7 +27,6 @@ blueRootserApp.config(function($routeProvider) {
 		templateUrl : '/myArticles',
 		controller  : 'myArticlesController'
 	});
-
 
 });
 
@@ -95,28 +94,39 @@ function getMousePosition(e){
 }
 
 function lookup(str, $http){
-	wikiUrl = "https://en.wiktionary.org/w/api.php?format=xml&action=query&titles=" +
+	
+	wikiUrl = "https://en.wiktionary.org/w/api.php?format=json&action=query&titles=" +
 	encodeURI(str) +
 	"&rvprop=content&prop=revisions&redirects=1";
+	
 	var result = "";
 	 
 	$http({
 	        method : "GET",
 	        url : wikiUrl
-	    }).then(function mySucces(response) {
+	    }).then(
+	    		
+	    function mySucces(response) {
+	    	console.log("wiktionary url success");
 	        result = response.data;
-	    }, function myError(response) {
+	    }, 
+	    
+	    function myError(response) {
+	    	console.log("wiktionary url fail");
 	        result = response.statusText;
 	    });
-	 
+
 	return result; 
 }
 function tooltip(tip, element, $http){
 	definitionText = lookup(tip, $http);
-    if(!document.getElementById('tooltip')) newelement('tooltip');
-    var lixlpixel_tooltip = document.getElementById('tooltip');
+    
+	if(!document.getElementById('tooltip')) newelement('tooltip');
+    
+	var lixlpixel_tooltip = document.getElementById('tooltip');
     lixlpixel_tooltip.innerHTML = definitionText;
     lixlpixel_tooltip.style.display = 'block';
+    
     element.on("mousemove", function(event){
 		getMousePosition(event);
 	});
