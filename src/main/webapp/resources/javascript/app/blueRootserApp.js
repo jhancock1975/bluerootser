@@ -111,6 +111,9 @@ function lookup(str, $http, innerHtml){
 	    	console.log('success');
 	    	var lixlpixel_tooltip = document.getElementById('tooltip');
 	        lixlpixel_tooltip.innerHTML = response.toString();
+	        //the meat of the response will be in
+	        //something like
+	        //response.query.pages[20767].revisions[0]['*']
 	    }
 	});
 	 
