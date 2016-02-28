@@ -93,39 +93,40 @@ function getMousePosition(e){
     }
 }
 
-function lookup(str, $http){
+function lookup(str, $http, innerHtml){
 	
 	wikiUrl = "https://en.wiktionary.org/w/api.php?format=json&action=query&titles=" +
 	encodeURI(str) +
 	"&rvprop=content&prop=revisions&redirects=1";
 	
 	var result = "";
+	
+	$.ajax( {
+	    url: wikiUrl,
+	    jsonp: "callback", 
+	    dataType: 'jsonp', 
+	    data: {	    },
+	    xhrFields: { withCredentials: true },
+	    success: function(response) { 
+	    	console.log('success');
+	    	var lixlpixel_tooltip = document.getElementById('tooltip');
+	        lixlpixel_tooltip.innerHTML = response.toString();
+	    }
+	});
 	 
-	$http({
-	        method : "GET",
-	        url : wikiUrl
-	    }).then(
-	    		
-	    function mySucces(response) {
-	    	console.log("wiktionary url success");
-	        result = response.data;
-	    }, 
-	    
-	    function myError(response) {
-	    	console.log("wiktionary url fail");
-	        result = response.statusText;
-	    });
-
 	return result; 
 }
 function tooltip(tip, element, $http){
-	definitionText = lookup(tip, $http);
     
-	if(!document.getElementById('tooltip')) newelement('tooltip');
+	if(!document.getElementById('tooltip')){
+		newelement('tooltip');
+	}
     
 	var lixlpixel_tooltip = document.getElementById('tooltip');
-    lixlpixel_tooltip.innerHTML = definitionText;
+    lixlpixel_tooltip.innerHTML = tip;
     lixlpixel_tooltip.style.display = 'block';
+    
+    lookup(tip, $http, lixlpixel_tooltip.innerHTML);
     
     element.on("mousemove", function(event){
 		getMousePosition(event);
