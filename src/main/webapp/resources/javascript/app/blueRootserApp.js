@@ -93,12 +93,24 @@ function getMousePosition(e){
     }
 }
 
+//the meat of the response will be in
+//something like
+//response.query.pages[20767].revisions[0]['*']
+function getDefinition(response){
+	for (pageNum in response.query.pages) {
+		break;
+	}
+	wikiText=response.query.pages[pageNum].revisions[0]['*'];
+	console.log("wikiText = " + wikiText);
+}
+
 function lookup(str, $http, innerHtml){
 	
 	wikiUrl = "https://en.wiktionary.org/w/api.php?format=json&action=query&titles=" +
 	encodeURI(str) +
 	"&rvprop=content&prop=revisions&redirects=1";
 	
+	console.log("wikiUrl = " + wikiUrl);
 	var result = "";
 	
 	$.ajax( {
@@ -109,11 +121,10 @@ function lookup(str, $http, innerHtml){
 	    xhrFields: { withCredentials: true },
 	    success: function(response) { 
 	    	console.log('success');
+	    	console.log(response);
 	    	var lixlpixel_tooltip = document.getElementById('tooltip');
-	        lixlpixel_tooltip.innerHTML = response.toString();
-	        //the meat of the response will be in
-	        //something like
-	        //response.query.pages[20767].revisions[0]['*']
+	        lixlpixel_tooltip.innerHTML = 'test';
+	        getDefinition(response);
 	    }
 	});
 	 
@@ -137,7 +148,6 @@ function tooltip(tip, element, $http){
 }
 
 function exit(element){
-    document.getElementById('tooltip').style.display = 'none';
     element.on("mousemove", null);
 }
 
