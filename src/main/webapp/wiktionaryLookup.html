@@ -13,6 +13,9 @@ function showPage(page,text) {
   // now you can modify content of #wikiInfo as you like
   $('#wikiInfo').find('a:not(.references a):not(.extiw):not([href^="#"])').attr('href',
     function() { return baseURL + $(this).attr('href');
+    
+    //get the pinyin
+    //$('#wikiInfo').find('span[class="form-of pinyin-ts-form-of lang-cmn"]').find("a").attr("title")
   });
   // ...
 }
