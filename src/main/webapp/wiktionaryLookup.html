@@ -1,7 +1,8 @@
 <html>
 <head>
-  <script type="text/javascript" src="resources/javascript/bower_components/jquery/dist/jquery.js"></script>
-  <script type="text/javascript">
+<script type="text/javascript"
+	src="resources/javascript/bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
 var baseURL = 'http://en.wiktionary.org';
 function showPage(page,text) {
   var sourceurl = baseURL + '/wiki/' + page;
@@ -17,29 +18,40 @@ function showPage(page,text) {
 }
 $(document).ready(function() {
   $('#pagetitle').hide();
-  $('#word').change(function() {
-    var page = this.value;
-    $('#wikiInfo').html('...please wait...');
-    $.getJSON(baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page='+page,
-    function(json) {
-      if(json.parse.revid > 0) {
-        showPage(page,json.parse.text['*']);
-      } else {
-        $('#wikiInfo').html('word not found');
-        $('#licenseinfo').hide();
-      }
-    });
+  $('#searchBtn').click(function (){
+	 console.log('click');
+	 var page = $('#word').val();
+	    $('#wikiInfo').html('...please wait...');
+
+	    //I don't want any of the other stuff returned in prop=...but I get page not found if I don't
+	    //include them
+	   wikiUrl = baseURL+'/w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page='+page,
+	   console.log(wikiUrl)
+	 
+	   $.getJSON(wikiUrl,
+	    function(json) {
+	      if(json.parse.revid > 0) {
+	        showPage(page,json.parse.text['*']);
+	      } else {
+	        $('#wikiInfo').html('word not found');
+	        $('#licenseinfo').hide();
+	      }
+	    });
   });
 });
   </script>
 </head>
 <body>
-  Lookup a word: <input type="text" id="word" />
-  <h1 id='pagetitle'></h1>
-  <div id="wikiInfo"></div>
-  <div id="licenseinfo" style="font-size:small; display:none;">
-    Modified original content <a id='sourceurl'>from Wiktionary</a>.
-    Text available under <a href="http:Content is available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share-Alike License</a>.
-  </div>
+	Lookup a word:
+	<input type="text" id="word" value='生'/>
+	<!-- used a query like /w/api.php?action=parse&format=json&page=%E7%94%9F&prop=text from sandbox -->
+		<p>
+	<button id="searchBtn" value="search">search</button><h1 id='pagetitle'></h1>
+	<div id="wikiInfo"></div>
+	<div id="licenseinfo" style="font-size: small; display: none;">
+		Modified original content <a id='sourceurl'>from Wiktionary</a>. Text
+		available under <a href="http:Content is available under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative
+			Commons Attribution/Share-Alike License</a>.
+	</div>
 </body>
 </html>
