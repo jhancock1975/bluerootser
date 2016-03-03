@@ -93,40 +93,29 @@ function getMousePosition(e){
     }
 }
 
-//the meat of the response will be in
-//something like
-//response.query.pages[20767].revisions[0]['*']
-function getDefinition(response){
-	for (pageNum in response.query.pages) {
-		break;
-	}
-	wikiText=response.query.pages[pageNum].revisions[0]['*'];
-	console.log("wikiText = " + wikiText);
+
+
+function getPronounceAndDef(wikiInfo){
+	pinYin = $(wikiInfo).find('span[class*="pinyin"]').find("a").attr("title");
+	zhuYin = $(wikiInfo).find("span[class='Bopo']");
+	return "test";
 }
 
 function lookup(str, $http, innerHtml){
 	
-	wikiUrl = "https://en.wiktionary.org/w/api.php?format=json&action=query&titles=" +
-	encodeURI(str) +
-	"&rvprop=content&prop=revisions&redirects=1";
+	wikiUrl = "https://en.wiktionary.org/" +
+	"w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page="+str
 	
 	console.log("wikiUrl = " + wikiUrl);
 	var result = "";
 	
-	$.ajax( {
-	    url: wikiUrl,
-	    jsonp: "callback", 
-	    dataType: 'jsonp', 
-	    data: {	    },
-	    xhrFields: { withCredentials: true },
-	    success: function(response) { 
-	    	console.log('success');
-	    	console.log(response);
-	    	var lixlpixel_tooltip = document.getElementById('tooltip');
-	        lixlpixel_tooltip.innerHTML = 'test';
-	        getDefinition(response);
-	    }
-	});
+	 $.getJSON(wikiUrl,
+		 function(json) { 
+			 console.log('success');
+			 console.log(json);
+			 var lixlpixel_tooltip = document.getElementById('tooltip');
+			 lixlpixel_tooltip.innerHTML = json.parse.text['*'];
+	 });
 	 
 	return result; 
 }
