@@ -15,7 +15,12 @@ function showPage(page,text) {
     function() { return baseURL + $(this).attr('href');
     
     //get the pinyin
-    //$('#wikiInfo').find('span[class="form-of pinyin-ts-form-of lang-cmn"]').find("a").attr("title")
+    //$('span[class="form-of pinyin-ts-form-of lang-cmn"]').find("a").attr("title")
+    //get the bopomofo
+    //$('span[class="Bopo"]').text()
+    //hoping that the first ordered list is always the chinese definition
+    //$("ol")[0]
+    //get the definition
   });
   // ...
 }
