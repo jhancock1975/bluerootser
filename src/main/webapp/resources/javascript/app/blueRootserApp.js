@@ -98,9 +98,10 @@ function errMsg(tooltip, str) {
 }
 
 function parseJson(tooltip){
-	pinYin = $(wikiInfo).find('span[class*="pinyin"]').find("a").attr("title");
-	zhuYin = $(wikiInfo).find("span[class='Bopo']");
-	return pinYin + " " + zhuYin;
+	pinYin = tooltip.find('span[class*="pinyin"]').find("a").attr("title");
+	zhuYin = tooltip.find("span[class='Bopo']").text();
+	definition = tooltip.find("ol")[0].innerHTML;
+	return pinYin + " " + zhuYin + "<br>" + definition;
 }
 
 function lookup(str, $http, tooltip){
@@ -111,7 +112,12 @@ function lookup(str, $http, tooltip){
 	$.getJSON(wikiUrl,
 		    function(json) {
 		      if((json.parse) && (json.parse.revid > 0)) {
+		    	  
+		    	  //save html into div
 		    	  tooltip.html(json.parse.text['*']);
+		    	  
+		    	  //reset div html to subset of html
+		    	  tooltip.html(parseJson(tooltip));
 		      } else {
 		        errMsg(tooltip, str);
 		      }
@@ -129,9 +135,11 @@ function tooltip(tip, element, $http){
     
 	var tooltip = $('#tooltip');
     tooltip.html(tip);
-    tooltip.css("display", "block");
+    tooltip.css("display", "none");
     
     lookup(tip, $http, tooltip);
+    
+    tooltip.css("display", "block");
     
     element.on("mousemove", function(event){
 		getMousePosition(event);
