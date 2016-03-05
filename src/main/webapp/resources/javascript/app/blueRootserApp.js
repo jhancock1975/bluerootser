@@ -93,41 +93,45 @@ function getMousePosition(e){
     }
 }
 
+function errMsg(tooltip, str) {
+	tooltip.html(str + "not found");
+}
 
-
-function getPronounceAndDef(wikiInfo){
+function parseJson(tooltip){
 	pinYin = $(wikiInfo).find('span[class*="pinyin"]').find("a").attr("title");
 	zhuYin = $(wikiInfo).find("span[class='Bopo']");
 	return pinYin + " " + zhuYin;
 }
 
-function lookup(str, $http, innerHtml){
+function lookup(str, $http, tooltip){
 	
 	wikiUrl = "https://en.wiktionary.org/" +
-	"w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page="+str
+		"w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page="+str;
 	
-	console.log("wikiUrl = " + wikiUrl);
-	var result = "";
-	
-	 $.getJSON(wikiUrl,
-		 function(json) { 
-			 console.log('success');
-			 console.log(json);
-			 var lixlpixel_tooltip = document.getElementById('tooltip');
-			 innerHTML = getPronounceAndDef(json.parse.text['*']);
-	 });
+	$.getJSON(wikiUrl,
+		    function(json) {
+		      if((json.parse) && (json.parse.revid > 0)) {
+		    	  tooltip.html(json.parse.text['*']);
+		      } else {
+		        errMsg(tooltip, str);
+		      }
+		    }).fail(function(jqxhr, textStatus, error){
+		    	console.log(textStatus + " " + error);
+		    	errMsg(tooltip, str);
+		    	});
 }
+
 function tooltip(tip, element, $http){
     
 	if(!document.getElementById('tooltip')){
 		newelement('tooltip');
 	}
     
-	var lixlpixel_tooltip = document.getElementById('tooltip');
-    lixlpixel_tooltip.innerHTML = tip;
-    lixlpixel_tooltip.style.display = 'block';
+	var tooltip = $('#tooltip');
+    tooltip.html(tip);
+    tooltip.css("display", "block");
     
-    lookup(tip, $http, lixlpixel_tooltip.innerHTML);
+    lookup(tip, $http, tooltip);
     
     element.on("mousemove", function(event){
 		getMousePosition(event);
@@ -135,6 +139,7 @@ function tooltip(tip, element, $http){
 }
 
 function exit(element){
+    document.getElementById('tooltip').style.display = 'none';
     element.on("mousemove", null);
 }
 
