@@ -98,7 +98,7 @@ function getMousePosition(e){
 function getPronounceAndDef(wikiInfo){
 	pinYin = $(wikiInfo).find('span[class*="pinyin"]').find("a").attr("title");
 	zhuYin = $(wikiInfo).find("span[class='Bopo']");
-	return "test";
+	return pinYin + " " + zhuYin;
 }
 
 function lookup(str, $http, innerHtml){
@@ -114,10 +114,8 @@ function lookup(str, $http, innerHtml){
 			 console.log('success');
 			 console.log(json);
 			 var lixlpixel_tooltip = document.getElementById('tooltip');
-			 lixlpixel_tooltip.innerHTML = json.parse.text['*'];
+			 innerHTML = getPronounceAndDef(json.parse.text['*']);
 	 });
-	 
-	return result; 
 }
 function tooltip(tip, element, $http){
     
