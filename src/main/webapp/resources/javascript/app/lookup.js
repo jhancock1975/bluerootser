@@ -13,12 +13,12 @@ var AUDIO_LINK_TEMPLATE = 'http://en.wiktionary.org/wiki/File:%file%';
 var GOOGLE_DICT_LINK_TEMPLATE = 'http://www.google.com/search?q=%query%&tbs=dfn:1';
 var THE_FREE_DICT_LINK_TEMPLATE = 'http://www.tfd.com/p/%query%';
 var SPEAKER_ICON_URL = '/resources/images/img/speaker.png';
-var HANDLE_ICON_URL = 'img/handle.png';
-var BACK_ICON_URL = 'img/back.png';
-var LOADER_ICON_URL = 'img/loader.gif';
-var EXTERNAL_ICON_URL = 'img/external.png';
-var GRADIENT_DOWN_URL = 'img/gradient_down.png';
-var GRADIENT_UP_URL = 'img/gradient_up.png';
+var HANDLE_ICON_URL = '/resources/images/img/handle.png';
+var BACK_ICON_URL = '/resources/images/img/back.png';
+var LOADER_ICON_URL = '/resources/images/img/loader.gif';
+var EXTERNAL_ICON_URL = '/resources/images/img/external.png';
+var GRADIENT_DOWN_URL = '/resources/images/img/gradient_down.png';
+var GRADIENT_UP_URL = '/resources/images/img/gradient_up.png';
 // Regexes.
 var DICT_LINK_REGEX = /^http:\/\/en\.wiktionary\.org\/wiki\/([^:]*)$/;
 var TITLE_CLASS_REGEX = RegExp('(^|\s)' +  ROOT_ID + '_title(\s|$)')
