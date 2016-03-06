@@ -12,7 +12,7 @@ var EXTERN_LINK_TEMPLATE = 'http://en.wiktionary.org/wiki/%query%';
 var AUDIO_LINK_TEMPLATE = 'http://en.wiktionary.org/wiki/File:%file%';
 var GOOGLE_DICT_LINK_TEMPLATE = 'http://www.google.com/search?q=%query%&tbs=dfn:1';
 var THE_FREE_DICT_LINK_TEMPLATE = 'http://www.tfd.com/p/%query%';
-var SPEAKER_ICON_URL = 'img/speaker.png';
+var SPEAKER_ICON_URL = '/resources/images/img/speaker.png';
 var HANDLE_ICON_URL = 'img/handle.png';
 var BACK_ICON_URL = 'img/back.png';
 var LOADER_ICON_URL = 'img/loader.gif';
@@ -60,7 +60,17 @@ var options = {
  ***************************************************************/
 // Main initialization function. Loads options and sets listeners.
 function initialize() {
- 
+  // Load options.
+  function setOpt(opt) {
+    backgroundFunctions({method: "retrieve", arg: opt}, function(response) {
+      if (response != null) options[opt] = response;
+    });
+  }
+
+  for (var opt in options) {
+    setOpt(opt);
+  }
+
   // Manually inject the stylesheet into non-HTML pages that have no <head>.
   if (!document.head && document.body) {
     link = document.createElement('link');
@@ -253,6 +263,9 @@ function createPopup(query, x, y, windowX, windowY, fixed) {
   frame.id = ROOT_ID;
   // Unique class to differentiate between frame instances.
   frame.className = ROOT_ID + (new Date()).getTime();
+  
+  //for some reason document does not have body element
+  //in script initialization, so we set it again here
   if (! body){
 	  body = document.getElementsByTagName('body')[0];
   }
@@ -262,7 +275,7 @@ function createPopup(query, x, y, windowX, windowY, fixed) {
   makeMoveable(frame, PADDING_TOP);
 
   // Start loading frame data.
-  chrome.runtime.sendMessage({method: 'lookup', arg: query}, function(response) {
+  backgroundFunctions({method: 'lookup', arg: query}, function(response) {
     if (response != null) {
       var wrapper = document.createElement('div');
       wrapper.innerHTML = createHtmlFromLookup(query, response);
@@ -382,7 +395,7 @@ function registerAudioIcon(icon, filename) {
     if (audio_cache[filename]) {
       playAudio(audio_cache[filename], src_element);
     } else {
-      chrome.runtime.sendMessage({method: 'get_audio', arg: filename}, function(url) {
+      backgroundFunctions({method:'get_audio', arg: filename}, function(url) {
         audio_cache[filename] = url;
         playAudio(url, src_element);
       });
@@ -683,7 +696,7 @@ function makeResizeable(container, handle) {
       content_box.style.height = new_height + 'px';
       if (options.saveFrameSize) {
         options.frameHeight = new_height;
-        chrome.runtime.sendMessage({method: 'store', arg: 'frameHeight', arg2: new_height}, function(response) {});
+        backgroundFunctions('store', 'frameHeight', new_height, function(response) {});
       }
     }
     if (moved.x > 0 || width >= 250) {
@@ -696,7 +709,7 @@ function makeResizeable(container, handle) {
 
       if (options.saveFrameSize) {
         options.frameWidth = new_width;
-        chrome.runtime.sendMessage({method: 'store', arg: 'frameWidth', arg2: new_width}, function(response) {});
+        backgroundFunctions({method: 'store', arg: 'frameWidth', arg2: new_width}, function(response) {});
       }
     }
 
