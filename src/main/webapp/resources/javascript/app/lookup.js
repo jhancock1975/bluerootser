@@ -12,13 +12,13 @@ var EXTERN_LINK_TEMPLATE = 'http://en.wiktionary.org/wiki/%query%';
 var AUDIO_LINK_TEMPLATE = 'http://en.wiktionary.org/wiki/File:%file%';
 var GOOGLE_DICT_LINK_TEMPLATE = 'http://www.google.com/search?q=%query%&tbs=dfn:1';
 var THE_FREE_DICT_LINK_TEMPLATE = 'http://www.tfd.com/p/%query%';
-var SPEAKER_ICON_URL = 'img/speaker.png';
-var HANDLE_ICON_URL = 'img/handle.png';
-var BACK_ICON_URL = 'img/back.png';
-var LOADER_ICON_URL = 'img/loader.gif';
-var EXTERNAL_ICON_URL = 'img/external.png';
-var GRADIENT_DOWN_URL = 'img/gradient_down.png';
-var GRADIENT_UP_URL = 'img/gradient_up.png';
+var SPEAKER_ICON_URL = chrome.runtime.getURL('img/speaker.png');
+var HANDLE_ICON_URL = chrome.runtime.getURL('img/handle.png');
+var BACK_ICON_URL = chrome.runtime.getURL('img/back.png');
+var LOADER_ICON_URL = chrome.runtime.getURL('img/loader.gif');
+var EXTERNAL_ICON_URL = chrome.runtime.getURL('img/external.png');
+var GRADIENT_DOWN_URL = chrome.runtime.getURL('img/gradient_down.png');
+var GRADIENT_UP_URL = chrome.runtime.getURL('img/gradient_up.png');
 // Regexes.
 var DICT_LINK_REGEX = /^http:\/\/en\.wiktionary\.org\/wiki\/([^:]*)$/;
 var TITLE_CLASS_REGEX = RegExp('(^|\s)' +  ROOT_ID + '_title(\s|$)')
@@ -60,13 +60,23 @@ var options = {
  ***************************************************************/
 // Main initialization function. Loads options and sets listeners.
 function initialize() {
- 
+  // Load options.
+  function setOpt(opt) {
+    chrome.runtime.sendMessage({method: 'retrieve', arg: opt}, function(response) {
+      if (response != null) options[opt] = response;
+    });
+  }
+
+  for (var opt in options) {
+    setOpt(opt);
+  }
+
   // Manually inject the stylesheet into non-HTML pages that have no <head>.
   if (!document.head && document.body) {
     link = document.createElement('link');
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    link.href = 'frame.css';
+    link.href = chrome.runtime.getURL('frame.css');
 
     document.body.appendChild(link);
   }
@@ -253,9 +263,6 @@ function createPopup(query, x, y, windowX, windowY, fixed) {
   frame.id = ROOT_ID;
   // Unique class to differentiate between frame instances.
   frame.className = ROOT_ID + (new Date()).getTime();
-  if (! body){
-	  body = document.getElementsByTagName('body')[0];
-  }
   body.appendChild(frame);
 
   // Make frame draggable by its top.
