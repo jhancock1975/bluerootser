@@ -1,5 +1,6 @@
 // API URLs.
-var DICT_API_URL = 'http://dictionary-lookup.org/%query%';
+var DICT_API_URL =  "https://en.wiktionary.org/" +
+	"w/api.php?action=parse&format=json&prop=text|revid|displaytitle&callback=?&page=%query%";
 var AUDIO_API_URL = 'https://en.wiktionary.org/wiki/File:%file%';
 
 // Helpers to store and access objects in local storage.
@@ -15,21 +16,20 @@ Storage.prototype.getObject = function(key) {
   }
 }
 
-// Helper to send an AJAX request.
+//Helper to send an AJAX request.
 function sendAjaxRequest(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      callback(xhr.responseText);
-    }
-  }
-  xhr.open('GET', url, true);
-  xhr.send();
-  
-  $.getJSON(url,
-		    function(json) {
-		      callback(json);
-		    });
+	$.getJSON(url,
+			function(json) {
+				console.log("sendAjaxRequest success");
+				if((json.parse) && (json.parse.revid > 0)) {
+					callback(json.parse.text['*']);
+				} else {
+					console.log("json result not in expected form");
+				}
+	})
+	.fail(function(jqxhr, textStatus, error){
+		console.log(textStatus + " " + error);
+	});
 }
 
 // Modified Server procedure from extension background script for extension
@@ -55,7 +55,7 @@ backgroundFunctions = function(request,  callback) {
     var url = DICT_API_URL.replace('%query%', request.arg);
 
     sendAjaxRequest(url, function(resp) {
-      callback(JSON.parse(resp || '{}'));
+      callback(resp);
     });
     
     return true; // Inform Chrome that we will make a delayed callback

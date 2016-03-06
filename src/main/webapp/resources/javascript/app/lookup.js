@@ -277,13 +277,8 @@ function createPopup(query, x, y, windowX, windowY, fixed) {
   // Start loading frame data.
   backgroundFunctions({method: 'lookup', arg: query}, function(response) {
     if (response != null) {
-      var wrapper = document.createElement('div');
-      wrapper.innerHTML = createHtmlFromLookup(query, response);
+      frame.innerHTML = createHtmlFromLookup(query, response);
       
-      for (var i = 0; i < wrapper.childNodes.length; i++) {
-        frame.appendChild(wrapper.childNodes[i]);
-      }
-
       // Add some dynamic element after the HTML is loaded.
       setTimeout(function() {
         // Create a dragging handle.
@@ -438,7 +433,7 @@ function createHtmlFromLookup(query, dict_entry) {
 	pinYin = this.$tempDiv.find('span[class*="pinyin"]').find("a").attr("title");
 	zhuYin = this.$tempDiv.find("span[class='Bopo']").text();
 	definition = this.$tempDiv.find("ol")[0].innerHTML;
-	return pinYin + " " + zhuYin + ' ' + definition;
+	return query + "<br>" + pinYin + " " + zhuYin + ' ' + definition; 
 }
 
 /***************************************************************

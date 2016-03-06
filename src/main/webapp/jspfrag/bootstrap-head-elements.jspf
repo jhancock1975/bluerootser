@@ -12,6 +12,7 @@
 <link href="<c:url value="/resources/javascript/bower_components/bootstrap/dist/css/bootstrap.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/site.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/logo-nav.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/frame.css" />" rel="stylesheet">
 <!--  
 	angular includes
 	consider moving to footer with ng-cloak or ng-bind to not block rendering of html
@@ -20,6 +21,8 @@
 <script	src="<c:url value="/resources/javascript/bower_components/angular/angular.js" />"></script>
 <script	src="<c:url value="/resources/javascript/bower_components/angular-bootstrap/ui-bootstrap.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/util.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/background.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/lookup.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/app.js" />"></script>
 
 <meta name="description" content="chinese reading system">
