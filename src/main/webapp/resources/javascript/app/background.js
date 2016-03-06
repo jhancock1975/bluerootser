@@ -15,6 +15,22 @@ Storage.prototype.getObject = function(key) {
   }
 }
 
+// Helper to get extension version.
+chrome.extension.getVersion = function() {
+  if (!chrome.extension.version_) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", chrome.extension.getURL('manifest.json'), false);
+    xhr.onreadystatechange = function() {
+      if (this.readyState == 4) {
+        var manifest = JSON.parse(this.responseText);
+        chrome.extension.version_ = manifest.version;
+      }
+    };
+    xhr.send();
+  }
+  return chrome.extension.version_;
+};
+
 // Helper to send an AJAX request.
 function sendAjaxRequest(url, callback) {
   var xhr = new XMLHttpRequest();
@@ -25,15 +41,9 @@ function sendAjaxRequest(url, callback) {
   }
   xhr.open('GET', url, true);
   xhr.send();
-  
-  $.getJSON(url,
-		    function(json) {
-		      callback(json);
-		    });
 }
 
-// Modified Server procedure from extension background script for extension
-// content script - lookup.js
+// Server procedure for content script.
 // Receives a request containing two parameters:
 //   method:
 //     "lookup" for a Dictionary lookup.
@@ -42,7 +52,7 @@ function sendAjaxRequest(url, callback) {
 //     "get_audio" to look up the URL of a given Wikimedia audio file.
 //   arg: the term to look up or the name of the object to retrieve/store.
 //   arg2: the object to store. Used only with "store".
-backgroundFunctions = function(request,  callback) {
+chrome.extension.onMessage.addListener(function(request, sender, callback) {
   if (request.method == 'retrieve') {
     // Return an object from local storage.
     callback(localStorage.getObject(request.arg));
@@ -77,4 +87,29 @@ backgroundFunctions = function(request,  callback) {
     // Invalid request method. Ignore it.
     callback('');
   }
-};
+});
+
+// If new version is loaded, show the options page.
+var current_version = chrome.extension.getVersion().split('.');
+current_version = current_version[0] + '.' + current_version[1];
+
+var saved_version = localStorage.getObject('version');
+if (saved_version) {
+  saved_version = saved_version.split('.');
+  saved_version = saved_version[0] + '.' + saved_version[1];
+} else {
+  // Remap default modifier on different platforms.
+  if (navigator.platform.match('Mac')) {
+    localStorage.setObject('clickModifier', 'Meta');
+    localStorage.setObject('shortcutModifier', 'Meta');
+    localStorage.setObject('shortcutKey', 'D');
+  } else if (navigator.platform.match('Linux')) {
+    localStorage.setObject('clickModifier', 'Ctrl');
+  } else {
+    localStorage.setObject('clickModifier', 'Alt');
+  }
+}
+if (saved_version != current_version) {
+  localStorage.setObject('version', current_version);
+  chrome.tabs.create({url: 'options.htm'});
+}
