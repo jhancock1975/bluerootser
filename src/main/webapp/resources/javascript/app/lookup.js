@@ -279,6 +279,7 @@ function createPopup(query, x, y, windowX, windowY, fixed) {
     if (response != null) {
       var wrapper = document.createElement('div');
       wrapper.innerHTML = createHtmlFromLookup(query, response);
+      
       for (var i = 0; i < wrapper.childNodes.length; i++) {
         frame.appendChild(wrapper.childNodes[i]);
       }
@@ -437,7 +438,7 @@ function createHtmlFromLookup(query, dict_entry) {
 	pinYin = this.$tempDiv.find('span[class*="pinyin"]').find("a").attr("title");
 	zhuYin = this.$tempDiv.find("span[class='Bopo']").text();
 	definition = this.$tempDiv.find("ol")[0].innerHTML;
-	return pinYin + " " + zhuYin + definition;
+	return pinYin + " " + zhuYin + ' ' + definition;
 }
 
 /***************************************************************
