@@ -432,6 +432,19 @@ function createHtmlFromLookup(query, dict_entry) {
 
 	pinYin = this.$tempDiv.find('span[class*="pinyin"]').find("a").attr("title");
 	zhuYin = this.$tempDiv.find("span[class='Bopo']").text();
+	
+	//hack to correct urls
+	this.$tempDiv.find('a').each(
+			function() {
+				var currentLoc = window.location.protocol + "//" + window.location.host;
+				console.log(currentLoc);
+				if (this.href.startsWith(currentLoc)) {
+					this.href = this.href.replace(currentLoc,
+							'https://en.wiktionary.org');
+					console.log(this.href)
+				}
+			});
+	
 	definition = this.$tempDiv.find("ol")[0].innerHTML;
 	return query + "<br>" + pinYin + " " + zhuYin + ' ' + definition; 
 }
