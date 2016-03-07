@@ -66,7 +66,7 @@
         <div class="row">
             <div id="main" class="col-lg-12" >
                 <h1>Boost Your Chinese Reading</h1>
-                <p>The latest articles are below.  Highlight text to look up in Wiktionary</p>                	
+                <p>The latest articles are below.  Highlight text, and use ctrl-click to look up in Wiktionary</p>                	
                 <!-- trying second ng cloak here because I see flicker after clicking navbar -->
                 <div ng-view ng-cloak>{{message}}
                 		<div id="articleDiv" ng-bind-html="articleText" ></div>

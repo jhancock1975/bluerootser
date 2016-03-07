@@ -277,8 +277,10 @@ function createPopup(query, x, y, windowX, windowY, fixed) {
   // Start loading frame data.
   backgroundFunctions({method: 'lookup', arg: query}, function(response) {
     if (response != null) {
-      frame.innerHTML = createHtmlFromLookup(query, response);
-      
+      var wrapper = document.createElement('div');
+      wrapper.innerHTML = createHtmlFromLookup(query, response);
+      frame.appendChild(wrapper);
+  
       // Add some dynamic element after the HTML is loaded.
       setTimeout(function() {
         // Create a dragging handle.
