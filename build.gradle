@@ -16,10 +16,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
-bootRepackage {
-    enabled = false;
-}
-apply plugin: 'war'
+apply plugin: 'war'  
 
 jar {
 	baseName = 'bluerootser'
@@ -38,9 +35,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-web'){
-		exclude group: 'org.apache.tomcat.embed'
-	}
+	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	
 	runtime('org.springframework.security:spring-security-taglibs:4.0.3.RELEASE')
@@ -68,5 +63,3 @@ eclipse {
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.9'
 }
-
-
