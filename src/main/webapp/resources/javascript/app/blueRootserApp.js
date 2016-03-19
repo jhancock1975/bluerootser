@@ -11,21 +11,21 @@ blueRootserApp.config(function($routeProvider) {
 
 	// route for the home page
 	.when('/', {
-		templateUrl : '/home',
+		templateUrl : '/bluerootser/home',
 		controller  : 'mainController'
 	})
 
 	// route for the login page
 	.when('/login', {        	
-		templateUrl : '/loginView',
+		templateUrl : '/bluerootser/loginView',
 		controller  : 'loginController'
 	})
 
 
 	// route for the contact page
 	.when('/myArticles', {
-		templateUrl : '/myArticles',
-		controller  : 'myArticlesController'
+		templateUrl : '/bluerootser/myArticles',
+		controller  : '/bluerootser/myArticlesController'
 	});
 
 });
@@ -38,7 +38,7 @@ blueRootserApp.controller('mainController', function($scope, $http) {
 
 	var data = {};
 	$http.defaults.headers.post['X-CSRF-TOKEN'] = csrfTokenVal;
-	result = $http.post("/articles", data).success(function(data, status, headers, config)	{
+	result = $http.post("/bluerootser/articles", data).success(function(data, status, headers, config)	{
 		console.log('success');
 		$scope.artcileHtml =  data;
 	}).error(function(data, status, headers, config){
