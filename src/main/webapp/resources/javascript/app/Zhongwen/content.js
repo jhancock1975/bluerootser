@@ -119,8 +119,8 @@ var zhongwenContent = {
             css.setAttribute('rel', 'stylesheet');
             css.setAttribute('type', 'text/css');
             var cssdoc = window.zhongwen.config.css;
-            css.setAttribute('href', chrome.extension.getURL('css/popup-' +
-                cssdoc + '.css'));
+            css.setAttribute('href', '/bluerootser/css/popup-' +
+                cssdoc + '.css');
             css.setAttribute('id', 'zhongwen-css');
             topdoc.getElementsByTagName('head')[0].appendChild(css);
 
@@ -659,10 +659,11 @@ var zhongwenContent = {
 
         lastSelEnd = selEndList;
         lastRo = ro;
-        chrome.extension.sendRequest({
+        processRequest({
             "type": "search",
             "text": text
         },
+        null,
         zhongwenContent.processEntry);
 
         return 0;
@@ -1520,7 +1521,7 @@ var zhongwenContent = {
 }
 
 //Event Listeners
-chrome.extension.onRequest.addListener(
+/*chrome.extension.onRequest.addListener(
     function(request, sender, sendResponse) {
         switch(request.type) {
             case 'enable':
@@ -1539,8 +1540,9 @@ chrome.extension.onRequest.addListener(
         }
     }
     );
-
+*/
 // When a page first loads, checks to see if it should enable script
-chrome.extension.sendRequest({
+/*chrome.extension.sendRequest({
     "type": "enable?"
 });
+*/

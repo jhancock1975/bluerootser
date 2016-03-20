@@ -66,7 +66,9 @@ blueRootserApp.directive("highlight", ['$http', function($http) {
 			console.log("mouse down");
 		});
 		
+		zhongwenMain.loadDictionary();
 		zhongwenContent.enableTab();
+		window.zhongwen.config = zhongwenMain.config;
 		element.on("mousemove", function(event){
 			zhongwenContent.onMouseMove(event);
 		});
