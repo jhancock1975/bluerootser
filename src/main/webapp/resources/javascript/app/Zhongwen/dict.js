@@ -83,10 +83,10 @@ zhongwenDict.prototype = {
     },
 
     loadDictionary: function() {
-        this.wordDict = this.fileRead("/bluerootser/data/cedict_ts.u8");
-        this.wordIndex = this.fileRead("/bluerootser/data/cedict.idx");
+        this.wordDict = this.fileRead("/bluerootser/resources/data/cedict_ts.u8");
+        this.wordIndex = this.fileRead("/bluerootser/resources/data/cedict.idx");
 
-        var grammarKeywordFile = this.fileRead("/bluerootser/data/grammarKeywordsMin.json");
+        var grammarKeywordFile = this.fileRead("/bluerootser/resources/data/grammarKeywordsMin.json");
         this.grammarKeywords = JSON.parse(grammarKeywordFile);
     },
 

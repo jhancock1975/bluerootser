@@ -30,7 +30,6 @@
 <!-- jQuery -->
     <script src="<c:url value="/resources/javascript/bower_components/jquery/dist/jquery.js" />" ></script>
 <script src="<c:url value="/resources/javascript/app/Zhongwen/js/jquery.jqGrid.min.js" />"></script>
-<script src="<c:url value="/resources/javascript/app/Zhongwen/js/options.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/Zhongwen/js/wordlist.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/Zhongwen/content.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/Zhongwen/dict.js" />"></script>
