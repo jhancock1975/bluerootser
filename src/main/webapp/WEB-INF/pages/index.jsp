@@ -10,8 +10,7 @@
 <script language='JavaScript' src="<c:url value="/resources/javascript/bower_components/angular-sanitize/angular-sanitize.js" />" ></script>
 <script language='JavaScript' src="<c:url value="/resources/javascript/app/blueRootserApp.js" />" ></script>
 <script language='JavaScript' >var csrfTokenVal="${_csrf.token}"</script>
-<!-- jQuery -->
-    <script src="<c:url value="/resources/javascript/bower_components/jquery/dist/jquery.js" />" ></script>
+
 <title>Blue Rootser 讀漢語 - read Chinese </title>
 
 </head>

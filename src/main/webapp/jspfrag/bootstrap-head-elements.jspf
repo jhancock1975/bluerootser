@@ -12,7 +12,13 @@
 <link href="<c:url value="/resources/javascript/bower_components/bootstrap/dist/css/bootstrap.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/site.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/logo-nav.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/frame.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/javascript/app/Zhongwen/css/popup-blue.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/javascript/app/Zhongwen/css/ui.jqgrid.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/javascript/app/Zhongwen/css/popup-black.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/javascript/app/Zhongwen/css/popup-lightblue.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/javascript/app/Zhongwen/css/redmond/jquery-ui-1.8.18.custom.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/javascript/app/Zhongwen/css/options.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/javascript/app/Zhongwen/css/popup-yellow.css" />" rel="stylesheet">
 <!--  
 	angular includes
 	consider moving to footer with ng-cloak or ng-bind to not block rendering of html
@@ -21,8 +27,15 @@
 <script	src="<c:url value="/resources/javascript/bower_components/angular/angular.js" />"></script>
 <script	src="<c:url value="/resources/javascript/bower_components/angular-bootstrap/ui-bootstrap.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/util.js" />"></script>
-<script src="<c:url value="/resources/javascript/app/background.js" />"></script>
-<script src="<c:url value="/resources/javascript/app/lookup.js" />"></script>
+<!-- jQuery -->
+    <script src="<c:url value="/resources/javascript/bower_components/jquery/dist/jquery.js" />" ></script>
+<script src="<c:url value="/resources/javascript/app/Zhongwen/js/jquery.jqGrid.min.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/Zhongwen/js/options.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/Zhongwen/js/wordlist.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/Zhongwen/content.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/Zhongwen/dict.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/Zhongwen/main.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/Zhongwen/background.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/app.js" />"></script>
 
 <meta name="description" content="chinese reading system">

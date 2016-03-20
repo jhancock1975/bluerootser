@@ -57,13 +57,18 @@ blueRootserApp.controller('mainController', function($scope, $http) {
 
 blueRootserApp.directive("highlight", ['$http', function($http) {
 	return function(scope, element, attrs) {
-		initialize();
+		
 		element.on('mouseup', function(event) {
 			console.log("mouse up");
 			
 		});
 		element.on("mousedown", function(event){
 			console.log("mouse down");
+		});
+		
+		zhongwenContent.enableTab();
+		element.on("mousemove", function(event){
+			zhongwenContent.onMouseMove(event);
 		});
 		
 	}
