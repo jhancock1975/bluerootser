@@ -1,4 +1,10 @@
 /*
+        dict.js - Slightly modified from Zhongwen
+        to work in browser with no plugin installed
+    	Copyright (C) 2016 John Hancock
+        
+        --
+        
         Zhongwen - A Chinese-English Popup Dictionary
         Copyright (C) 2011 Christian Schiller
         https://chrome.google.com/extensions/detail/kkmlkkjojmombglmlpbpapmhcaljjkde

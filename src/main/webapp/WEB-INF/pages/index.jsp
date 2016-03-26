@@ -35,11 +35,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="#/">Home</a>
                     </li>
                     <sec:authorize access="isAuthenticated()">
                     <li>
-      					<form action="/logout" method="post">
+      					<form action="/bluerootser/logout" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input class="logout-button nav navbar-nav" type="submit" value="Sign Out" />
 						</form>
@@ -65,7 +65,7 @@
         <div class="row">
             <div id="main" class="col-lg-12" >
                 <h1>Boost Your Chinese Reading</h1>
-                <p>The latest articles are below.  Highlight text, and use ctrl-click to look up in Wiktionary</p>                	
+                <p>The latest articles are below.  Mouse over / touch text to look up word</p>                	
                 <!-- trying second ng cloak here because I see flicker after clicking navbar -->
                 <div ng-view ng-cloak>{{message}}
                 		<div id="articleDiv" ng-bind-html="articleText" ></div>
