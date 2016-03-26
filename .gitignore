@@ -9,3 +9,4 @@
 /src/main/webapp/startbootstrap-logo-nav/
 .springBeans
 logfile
+push-and-restart.sh
