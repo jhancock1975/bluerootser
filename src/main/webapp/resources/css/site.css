@@ -1,9 +1,11 @@
 @CHARSET "UTF-8";
+
 .banner {
 	display: block;
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
+
 .site-body {
 	background-color: #FFFFFF;
 }
@@ -13,26 +15,32 @@
 	like a link for the nav bar
 */
 .logout-button {
-     background:none!important;
-     border:none; 
-     font: inherit;
-     cursor: pointer;
+	background: none !important;
+	border: none;
+	font: inherit;
+	cursor: pointer;
 }
 
 .logout-button:hover {
-	color:#FFFFFF;
+	color: #FFFFFF;
 }
 
 /* tooltip code */
-
 #tooltip {
-    padding: 3px;
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    text-align: center;
-    font-size: smaller;
+	padding: 3px;
+	background: #f9f9f9;
+	border: 1px solid #eee;
+	text-align: center;
+	font-size: smaller;
 }
 
 div.tip {
-    border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+
+.bannerHr {
+	width: 100%;
+	color: black;
+	height: 1px;
+	background-color: black;
 }

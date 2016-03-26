@@ -13,4 +13,5 @@ public class Constants {
 	public static final String home = "/home";
 	public static final String resources = "/resources/**";
 	public static final String root = "/";
+	public static final String help = "/help";
 }

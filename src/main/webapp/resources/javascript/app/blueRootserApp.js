@@ -25,7 +25,13 @@ blueRootserApp.config(function($routeProvider) {
 	// route for the contact page
 	.when('/myArticles', {
 		templateUrl : '/bluerootser/myArticles',
-		controller  : '/bluerootser/myArticlesController'
+		controller  : 'myArticlesController'
+	})
+	
+	// route for the help page
+	.when('/help', {
+		templateUrl : '/bluerootser/help',
+		controller  : 'helpController'
 	});
 
 });
@@ -78,6 +84,10 @@ blueRootserApp.directive("highlight", ['$http', function($http) {
 
 blueRootserApp.controller('loginController', function($scope) {
 	$scope.message = 'Look! I am the login page.';
+});
+
+blueRootserApp.controller('helpController', function($scope) {
+	console.log("site help page");
 });
 
 blueRootserApp.controller('myArticlesController', function($scope) {

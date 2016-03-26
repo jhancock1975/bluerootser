@@ -4,10 +4,9 @@
         <title>Spring Security Example</title>
     </head>
     <body>
-        <h1>Welcome!</h1>
 		 
-		<sec:authorize access="hasRole('ROLE_USER')">
-        <h1>You are in the user role</h1>
+	<sec:authorize access="hasRole('ROLE_USER')">
+		<!-- content for logged in user goes here -->
         </sec:authorize>
         
     	<div id="articleDiv" ng-controller="mainController" ng-bind-html="artcileHtml" highlight class="tip"></div>

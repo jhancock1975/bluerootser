@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://www.springframework.org/tags"%>
 <%@ include file="/jspfrag/bootstrap-head-elements.jspf"%>
 
-<link href="/resources/css/signin.css" rel="stylesheet">
+<link href="/bluerootser/resources/css/signin.css" rel="stylesheet">
 
 <title>Blue Rootser - Please Login</title>
 

@@ -8,8 +8,8 @@
 <body ng-controller="StoreController">
 
 	<sec:authorize access="hasRole('ROLE_USER')">
-        <h1>You are in the user role</h1>
-    </sec:authorize>
+		<!-- content for logged in users goes here -->
+	</sec:authorize>
         
 	<textarea ng-model="message" cols="40" rows="10"></textarea>
 	<button type="button" class="btn btn-default" ng-click="save()">Save</button>

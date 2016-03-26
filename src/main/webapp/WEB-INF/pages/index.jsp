@@ -44,14 +44,17 @@
 							<input class="logout-button nav navbar-nav" type="submit" value="Sign Out" />
 						</form>
 					</li>
+					 <li>
+                        <a href="#myArticles">My Articles</a>
+                    </li>
                     </sec:authorize>
 					<sec:authorize access="!isAuthenticated()">
                     <li>
                         <a href="#login">Log In</a>
                     </li>
                     </sec:authorize>
-                    <li>
-                        <a href="#myArticles">My Articles</a>
+                     <li>
+                        <a href="#help">Help</a>
                     </li>
                 </ul>
             </div>
@@ -65,7 +68,10 @@
         <div class="row">
             <div id="main" class="col-lg-12" >
                 <h1>Boost Your Chinese Reading</h1>
-                <p>The latest articles are below.  Mouse over / touch text to look up word</p>                	
+                <p>The latest articles are below.  Mouse over or touch text to look up word. 
+                	Click <a href="#help"><i>here</i></a> to learn more about using this site.
+                </p>
+                <hr class="bannerHr"  />               	
                 <!-- trying second ng cloak here because I see flicker after clicking navbar -->
                 <div ng-view ng-cloak>{{message}}
                 		<div id="articleDiv" ng-bind-html="articleText" ></div>
