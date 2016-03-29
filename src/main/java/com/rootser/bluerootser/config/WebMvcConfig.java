@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.rootser.bluerootser.aspect.LoggingAspect;
+import com.rootser.bluerootser.constants.Constants;
  
 @Configuration
 @EnableWebMvc
@@ -52,6 +53,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
         registry.addViewController("/myArticles").setViewName("myArticles");
         registry.addViewController("/loginView").setViewName("loginView");
         registry.addViewController("/help").setViewName("helpView");
+        registry.addViewController(Constants.memorizationTechniques).setViewName("memorizationTechniques");
     }
 
     

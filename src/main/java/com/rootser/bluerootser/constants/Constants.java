@@ -9,9 +9,11 @@ package com.rootser.bluerootser.constants;
  * Annotations will only accept constant values, so we cannot use an enum.
  */
 public class Constants {
-	public static final String articles = "/articles";
-	public static final String home = "/home";
-	public static final String resources = "/resources/**";
+	public static final String articles = "articles";
+	public static final String home = "home";
+	public static final String resources = "resources/**";
 	public static final String root = "/";
-	public static final String help = "/help";
+	public static final String help = "help";
+	public static final String memorizationTechniques = "memorizationTechniques";
+	public static final String myArea = "myArea";
 }

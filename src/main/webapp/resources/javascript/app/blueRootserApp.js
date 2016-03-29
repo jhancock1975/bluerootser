@@ -23,9 +23,15 @@ blueRootserApp.config(function($routeProvider) {
 
 
 	// route for the contact page
-	.when('/myArticles', {
-		templateUrl : '/bluerootser/myArticles',
-		controller  : 'myArticlesController'
+	.when('/myArea', {
+		templateUrl : '/bluerootser/myArea',
+		controller  : 'myAreaController'
+	})
+	
+	// route for the memorization techniques page
+	.when('/memorizationTechniques', {
+		templateUrl : '/bluerootser/memorizationTechniques',
+		controller  : 'memorizationTechniquesController'
 	})
 	
 	// route for the help page
@@ -90,6 +96,10 @@ blueRootserApp.controller('helpController', function($scope) {
 	console.log("site help page");
 });
 
-blueRootserApp.controller('myArticlesController', function($scope) {
+blueRootserApp.controller('memorizationTechniquesController', function($scope) {
+	console.log("site help page");
+});
+
+blueRootserApp.controller('myAreaController', function($scope) {
 	$scope.message = 'Contact us! JK. This is just a demo.';
 });

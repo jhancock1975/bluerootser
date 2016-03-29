@@ -45,7 +45,7 @@
 						</form>
 					</li>
 					 <li>
-                        <a href="#myArticles">My Articles</a>
+                        <a href="#myArea">My Area</a>
                     </li>
                     </sec:authorize>
 					<sec:authorize access="!isAuthenticated()">
@@ -67,11 +67,6 @@
     <div class="container">
         <div class="row">
             <div id="main" class="col-lg-12" >
-                <h1>Boost Your Chinese Reading</h1>
-                <p>The latest articles are below.  Mouse over or touch text to look up word. 
-                	Click <a href="#help"><i>here</i></a> to learn more about using this site.
-                </p>
-                <hr class="bannerHr"  />               	
                 <!-- trying second ng cloak here because I see flicker after clicking navbar -->
                 <div ng-view ng-cloak>{{message}}
                 		<div id="articleDiv" ng-bind-html="articleText" ></div>
@@ -81,9 +76,6 @@
     </div>
     <!-- /.container -->
 
-    
-	
-    
     <!-- Bootstrap Core JavaScript -->
     <script src="<c:url value="/resources/javascript/bower_components/bootstrap/dist/js/bootstrap.js" />" ></script>
 

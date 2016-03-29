@@ -18,9 +18,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers(Constants.root.toString(), Constants.home.toString(),
-                		Constants.resources.toString(), Constants.articles.toString(),
-                		Constants.help.toString()).permitAll()
+                .antMatchers(Constants.root.toString(), 
+                		"/" + Constants.home.toString(),
+                		"/" + Constants.resources.toString(), 
+                		"/" +  Constants.articles.toString(),
+                		"/" + Constants.help.toString(), 
+                		"/" + Constants.memorizationTechniques.toString())
+             .permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
