@@ -102,7 +102,7 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 });
 
 blueRootserApp.controller('myAreaController', function($scope, $http) {
-	$http.get('/bluerootser/user')
+	$http.post('/bluerootser/user')
 		.success(function (data){
 			console.log('success');
 		}).error(function(data){
