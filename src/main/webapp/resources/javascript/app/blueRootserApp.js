@@ -42,6 +42,7 @@ blueRootserApp.config(function($routeProvider) {
 
 });
 
+
 //create the controller and inject Angular's $scope
 blueRootserApp.controller('mainController', function($scope, $http) {
 	// create a message to display in our view
@@ -100,6 +101,11 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 	console.log("site help page");
 });
 
-blueRootserApp.controller('myAreaController', function($scope) {
-	$scope.message = 'Contact us! JK. This is just a demo.';
+blueRootserApp.controller('myAreaController', function($scope, $http) {
+	$http.get('/bluerootser/user')
+		.success(function (data){
+			console.log('success');
+		}).error(function(data){
+			console.log('error');
+		});
 });
