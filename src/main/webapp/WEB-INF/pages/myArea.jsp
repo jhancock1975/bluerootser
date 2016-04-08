@@ -4,12 +4,16 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <title>My Area On Bluerootser</title>
+
 </head>
-<body>
+<body >
 <h1>Your Account Information</h1>
 <core:forEach var="user" items="${curUserList}">
 	<h1> username = ${user.userName}</h1>
 	</core:forEach>
-
 </body>
+<p>${curUser.userName}</p>
+<p>${curUser.firstName}</p>
+<p>${curUser.lastName}</p>
+<p>${curUser.email}</p>
 </html>

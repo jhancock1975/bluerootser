@@ -2,6 +2,9 @@ package com.rootser.bluerootser.controller;
 
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,7 +32,12 @@ public class MyAreaController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName(); //get logged in username
 	    List<User> curUserList = userRepo.findByUserName(name);
-	    mav.addObject("curUserList", curUserList);
+	    if (CollectionUtils.isEmpty(curUserList)){ 
+	    	throw new RuntimeException("Security context returned user id, but user id not in users table");
+	    } else if (curUserList.size() > 1){
+	    	throw new RuntimeException("Multiple entries in users table for user id.");
+	    }
+	    mav.addObject("curUser", curUserList.get(0));
 	    mav.setViewName(Constants.myArea);
 	    return mav;
 	}
