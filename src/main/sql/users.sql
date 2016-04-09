@@ -17,7 +17,7 @@ CREATE TABLE public.users
   lastname text,
   password text,
   enabled boolean,
-  email text,
+  email text NOT NULL,
   dob date,
   CONSTRAINT users_pkey PRIMARY KEY (username)
 )
