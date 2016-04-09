@@ -1,5 +1,7 @@
 package com.rootser.bluerootser.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,6 +30,9 @@ public class User {
 	
 	@Column(name="email")
 	String email;
+	
+	@Column(name="dob")
+	Date dob;
 
 	public String getUserName() {
 		return userName;
@@ -81,6 +86,14 @@ public class User {
 	public String toString() {
 		return "User [userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
 				+ password + ", enabled=" + enabled + ", email=" + email + "]";
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
 	}
 	
 	

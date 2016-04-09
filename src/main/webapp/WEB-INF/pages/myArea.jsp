@@ -8,12 +8,17 @@
 </head>
 <body >
 <h1>Your Account Information</h1>
-<core:forEach var="user" items="${curUserList}">
-	<h1> username = ${user.userName}</h1>
-	</core:forEach>
-</body>
+
 <p>${curUser.userName}</p>
 <p>${curUser.firstName}</p>
 <p>${curUser.lastName}</p>
 <p>${curUser.email}</p>
+<label for="inputEmail" class="sr-only">Email address</label>
+<input type="text" name="username" id="inputEmail" class="form-control" value="${curUser.email}" required autofocus>
+<label for="inputPassword" class="sr-only">Password</label>
+<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+<label for="inputDob" class="sr-only">Birthday</label>
+<input type="text" name="dob" id="inputDob" class="form-control" value="${curUser.dob}" required>
+
+</body>
 </html>

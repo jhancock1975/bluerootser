@@ -4,17 +4,40 @@ create table basetable
 	created timestamp with time zone
 );
 
+-- Table: public.users
+
+-- DROP TABLE public.users;
+
 CREATE TABLE public.users
 (
-	username text NOT NULL,
-	firstname text,
-	lastname text,
-	password text,
-	email text, 
-	enabled boolean,
-	CONSTRAINT users_pkey PRIMARY KEY (username)
+-- Inherited from table basetable:  updated timestamp with time zone DEFAULT now(),
+-- Inherited from table basetable:  created timestamp with time zone,
+  username text NOT NULL,
+  firstname text,
+  lastname text,
+  password text,
+  enabled boolean,
+  email text,
+  dob date,
+  CONSTRAINT users_pkey PRIMARY KEY (username)
 )
-inherits (basetable);
+INHERITS (public.basetable)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.users
+  OWNER TO john;
+
+-- Index: public.dob_idx
+
+-- DROP INDEX public.dob_idx;
+
+CREATE INDEX dob_idx
+  ON public.users
+  USING btree
+  (dob);
+
+
 
 create table roles (
 	id serial, 
