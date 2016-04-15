@@ -15,4 +15,9 @@ public class UserServiceImpl implements UserService{
 	public List<User> getUser(String userId){
 		return userRepo.findByUserName(userId);
 	}
+	@Override
+	public User updateUser(User userObj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

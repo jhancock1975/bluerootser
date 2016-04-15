@@ -28,6 +28,12 @@ blueRootserApp.config(function($routeProvider) {
 		controller  : 'myAreaController'
 	})
 	
+	// route for the update user form
+	.when('/updateUser', {
+		templateUrl : '/bluerootser/updateUser',
+		controller  : 'updateUser'
+	})
+	
 	// route for the memorization techniques page
 	.when('/memorizationTechniques', {
 		templateUrl : '/bluerootser/memorizationTechniques',
@@ -105,6 +111,28 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 	//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
 	var postObject = new Object();
     postObject.userName = $scope.userName;
+    //var s=JSON.stringify(postObject);
+
+    $http({
+        url: '/bluerootser/user',
+        dataType: 'json',
+        method: 'POST',
+        data: postObject,
+        headers: {
+            "Content-Type": "application/json"
+        	}
+    	})
+		.success(function (response){
+			console.log('success');
+		}).error(function(error){
+			console.log('error');
+		});
+});
+
+blueRootserApp.controller('updateUserController', function($scope, $http) {
+	//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
+	var postObject = new Object();
+    postObject.userName = $scope.updateUserForm.userName;
     //var s=JSON.stringify(postObject);
 
     $http({

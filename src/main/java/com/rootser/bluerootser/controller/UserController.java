@@ -13,7 +13,12 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	@RequestMapping("/user") 
-	public User getUser(@RequestParam(value="curUserId", defaultValue="jhancock") String userName){
+	public User getUser(@RequestParam(value="curUserId") String userName){
 		return userService.getUser(userName).get(0);
+	}
+	
+	@RequestMapping("/updateUser") 
+	public User updateUser(@RequestParam(value="curUserId") User userObj){
+		return userService.updateUser(userObj);
 	}
 }
