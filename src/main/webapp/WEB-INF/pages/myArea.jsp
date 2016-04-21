@@ -12,6 +12,8 @@
 <form class="form-signin" action="/bluerootser/updateUser" id="updateUserForm" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	
+	<input type="hidden"  name="curUserId" id="curUserId" value="${curUser.userName}"/>
+	
 	<label for="inputEmail" class="sr-only">Email address</label>
 	<input type="text" name="email" id="inputEmail" class="form-control" value="${curUser.email}" required autofocus/>
 	
