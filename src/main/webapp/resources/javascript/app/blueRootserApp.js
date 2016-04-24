@@ -112,14 +112,17 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 	
 	$scope.updateUser = function(){
 		console.log('in my updateUserController scope.userName = ', $scope.curUserId);
-		console.log('in my updateUserController scope.email = ', $('#curUserId').val());
+		console.log('in my updateUserController scope.email = ', $scope.email);
 		//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
 		var postObject = new Object();
 		postObject.userName = $('#curUserId').val();
 		postObject.email = $('#inputEmail').val();
-		postObject.firstName = $('#input')
+		postObject.firstName = $('#inputFirstName').val();
+		postObject.lastName = $('#inputLastName').val();
+		postObject.dob = $('#inputDob').val();
+		console.log(postObject);
 		$http({
-			url: '/bluerootser/user',
+			url: '/bluerootser/updateUser',
 			dataType: 'json',
 			method: 'POST',
 			data: postObject,
@@ -131,6 +134,7 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 			console.log('success');
 		}).error(function(error){
 			console.log('error');
+			console.log(error);
 		});
     };
 });
