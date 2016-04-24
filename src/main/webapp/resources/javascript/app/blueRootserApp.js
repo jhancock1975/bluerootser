@@ -108,45 +108,37 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 });
 
 blueRootserApp.controller('myAreaController', function($scope, $http) {
-	//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
-	var postObject = new Object();
-    postObject.userName = $scope.userName;
-    //var s=JSON.stringify(postObject);
-
-    $http({
-        url: '/bluerootser/user',
-        dataType: 'json',
-        method: 'POST',
-        data: postObject,
-        headers: {
-            "Content-Type": "application/json"
-        	}
-    	})
+	console.log('in my area controller');
+	
+	$scope.updateUser = function(){
+		console.log('in my updateUserController scope.userName = ', $scope.curUserId);
+		console.log('in my updateUserController scope.email = ', $('#curUserId').val());
+		//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
+		var postObject = new Object();
+		postObject.userName = $('#curUserId').val();
+		postObject.email = $('#inputEmail').val();
+		postObject.firstName = $('#input')
+		$http({
+			url: '/bluerootser/user',
+			dataType: 'json',
+			method: 'POST',
+			data: postObject,
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
 		.success(function (response){
 			console.log('success');
 		}).error(function(error){
 			console.log('error');
 		});
+    };
 });
 
 blueRootserApp.controller('updateUserController', function($scope, $http) {
-	//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
-	var postObject = new Object();
-    postObject.userName = $scope.updateUserForm.userName;
-    //var s=JSON.stringify(postObject);
+	console.log('in updateUserController');
+    
+	
 
-    $http({
-        url: '/bluerootser/user',
-        dataType: 'json',
-        method: 'POST',
-        data: postObject,
-        headers: {
-            "Content-Type": "application/json"
-        	}
-    	})
-		.success(function (response){
-			console.log('success');
-		}).error(function(error){
-			console.log('error');
-		});
+  
 });
