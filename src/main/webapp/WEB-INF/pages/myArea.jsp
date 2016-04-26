@@ -10,15 +10,24 @@
 <div class="container">
 <h2 class="form-signin-heading">Your Account Information</h2>
 <form class="form-signin"  id="updateUserForm"  >
+	<p>Change any values below and click submit.  Changes will be saved to your account.</p> 
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	
 	<input type="hidden"  name="curUserId" id="curUserId" value="${curUser.userName}"/>
 	
 	<label for="inputEmail" class="sr-only">Email address</label>
-	<input type="text" name="email" id="inputEmail" class="form-control" value="${curUser.email}"   required autofocus/>
+	<input type="text" name="email" id="inputEmail" class="form-control" value="${curUser.email}" autofocus/>
+	
+	<p>To update your password, enter your existing password, and enter a new password twice, to confirm the correct value.</p>
 	
 	<label for="inputPassword" class="sr-only">Password</label>
-	<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required/>
+	<input type="password" name="password" id="inputPassword" class="form-control"/>
+	
+	<label for="newPassword1" class="sr-only">New Password</label>
+	<input type='password' name='newPassword1' id='inputNewPassword1' class='form-control' />
+	
+	<label for="newPassword2" class="sr-only">New Password</label>
+	<input type='password' name='newPassword2' id='inputNewPassword2' class='form-control' />
 	
 	<label for="inputDob" class="sr-only">Birthday</label>
 	<input type="text" name="dob" id="inputDob" class="form-control" value="${curUser.dob}" required/>

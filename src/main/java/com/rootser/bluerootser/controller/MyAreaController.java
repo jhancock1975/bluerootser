@@ -26,7 +26,7 @@ public class MyAreaController {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@RequestMapping(value = "/" + Constants.myArea, method = RequestMethod.GET)
+	@RequestMapping(value = "/" + Constants.myArea, method = RequestMethod.POST)
 	public ModelAndView getMyArea(){
 		ModelAndView mav = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

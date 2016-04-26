@@ -1,8 +1,13 @@
+/**
+ * class used for retrieving username
+ * with no password
+ */
 package com.rootser.bluerootser.model;
 
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Transient;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
@@ -22,9 +27,6 @@ public class User {
 	@Column(name="lastname")
 	String lastName;
 	
-	@Column(name="password")
-	String password;
-	
 	@Column(name="enabled")
 	Boolean enabled;
 	
@@ -33,7 +35,10 @@ public class User {
 	
 	@Column(name="dob")
 	Date dob;
-
+	
+	@Transient
+	String newPassword;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -58,14 +63,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -85,7 +82,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+ password + ", enabled=" + enabled + ", email=" + email + "]";
+				+  ", enabled=" + enabled + ", email=" + email + "]";
 	}
 
 	public Date getDob() {
@@ -94,6 +91,14 @@ public class User {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 	
 	

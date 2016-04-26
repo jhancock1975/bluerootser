@@ -8,4 +8,5 @@ public interface UserService {
 	public List<User> getUser(String userId);
 
 	public User updateUser(User userObj);
+
 }
