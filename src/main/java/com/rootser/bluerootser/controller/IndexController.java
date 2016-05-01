@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rootser.bluerootser.constants.Constants;
 import com.rootser.bluerootser.logging.InjectLogger;
 import com.rootser.bluerootser.service.ArticleFetchSvc;
 @Controller
@@ -16,7 +17,7 @@ public class IndexController {
 	@Autowired
 	 private ArticleFetchSvc fetchSvc;
 	 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = Constants.root, method = RequestMethod.GET)
     public ModelAndView getArticles() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index"); 

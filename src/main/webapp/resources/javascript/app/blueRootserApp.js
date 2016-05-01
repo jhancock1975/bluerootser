@@ -11,38 +11,38 @@ blueRootserApp.config(function($routeProvider) {
 
 	// route for the home page
 	.when('/', {
-		templateUrl : '/bluerootser/home',
+		templateUrl : '/home',
 		controller  : 'mainController'
 	})
 
 	// route for the login page
 	.when('/login', {        	
-		templateUrl : '/bluerootser/loginView',
+		templateUrl : '/loginView',
 		controller  : 'loginController'
 	})
 
 
 	// route for the contact page
 	.when('/myArea', {
-		templateUrl : '/bluerootser/myArea',
+		templateUrl : '/myArea',
 		controller  : 'myAreaController'
 	})
 	
 	// route for the update user form
 	.when('/updateUser', {
-		templateUrl : '/bluerootser/updateUser',
+		templateUrl : '/updateUser',
 		controller  : 'updateUser'
 	})
 	
 	// route for the memorization techniques page
 	.when('/memorizationTechniques', {
-		templateUrl : '/bluerootser/memorizationTechniques',
+		templateUrl : '/memorizationTechniques',
 		controller  : 'memorizationTechniquesController'
 	})
 	
 	// route for the help page
 	.when('/help', {
-		templateUrl : '/bluerootser/help',
+		templateUrl : '/help',
 		controller  : 'helpController'
 	});
 
@@ -57,7 +57,7 @@ blueRootserApp.controller('mainController', function($scope, $http) {
 
 	var data = {};
 	$http.defaults.headers.post['X-CSRF-TOKEN'] = csrfTokenVal;
-	result = $http.post("/bluerootser/articles", data).success(function(data, status, headers, config)	{
+	result = $http.post("/articles", data).success(function(data, status, headers, config)	{
 		console.log('success');
 		$scope.artcileHtml =  data;
 	}).error(function(data, status, headers, config){
@@ -121,7 +121,7 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		console.log(postObject);
 		//$http.defaults.headers.post['X-CSRF-TOKEN'] = $()
 		$http({
-			url: '/bluerootser/updateUser',
+			url: '/updateUser',
 			dataType: 'json',
 			method: 'POST',
 			data: postObject,
