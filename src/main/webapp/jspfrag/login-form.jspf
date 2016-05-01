@@ -1,5 +1,5 @@
 
-      <form class="form-signin" action="/login" method="post">
+      <form class="form-signin" action="/login" method="POST">
       	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" name="username" id="inputEmail" class="form-control" placeholder="E-mail address" required autofocus>

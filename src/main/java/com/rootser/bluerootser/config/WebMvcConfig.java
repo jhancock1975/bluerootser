@@ -27,7 +27,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/bluerootser/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
  
     @Bean
@@ -48,7 +48,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("//hello").setViewName("hello");
+        registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/myArticles").setViewName("myArticles");
         registry.addViewController("/loginView").setViewName("loginView");
