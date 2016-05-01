@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 @Aspect
 public class LoggingAspect {
 	private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
-	@Before("execution(* com.rootser.bluerootser.controller.HelloWorldController.hello(..))")
+	@Before("execution(* com.rootser.bluerootser.controller.UserController.updateUser(..))")
 	public void logBefore(JoinPoint joinPoint){
-		logger.debug("before hello execution");
+		logger.debug("before update user");
 	}
 }

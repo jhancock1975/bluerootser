@@ -19,12 +19,7 @@ public class IndexController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView getArticles() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("index");
-        
-        /*List<Article> articles= fetchSvc.getArticles(10, "http://www.cna.com.tw", "/news/");
-        
-        mav.addObject("articles", articles);*/
- 
+        mav.setViewName("index"); 
         return mav;
     }
  

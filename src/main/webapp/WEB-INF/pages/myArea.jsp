@@ -18,7 +18,7 @@
 	<label for="inputEmail" class="sr-only">Email address</label>
 	<input type="text" name="email" id="inputEmail" class="form-control" value="${curUser.email}" autofocus/>
 	
-	<p>To update your password, enter your existing password, and enter a new password twice, to confirm the correct value.</p>
+	<p>To update your password, enter your existing password.  Then, enter a new password twice to confirm the correct value.</p>
 	
 	<label for="inputPassword" class="sr-only">Password</label>
 	<input type="password" name="password" id="inputPassword" class="form-control"/>

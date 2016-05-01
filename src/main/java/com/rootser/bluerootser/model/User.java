@@ -39,6 +39,9 @@ public class User {
 	@Transient
 	String newPassword;
 	
+	@Column(name="password")
+	String password;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -101,5 +104,11 @@ public class User {
 		this.newPassword = newPassword;
 	}
 	
-	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
