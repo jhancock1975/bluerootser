@@ -39,7 +39,7 @@
                     </li>
                     <sec:authorize access="isAuthenticated()">
                     <li>
-      					<form action="/bluerootser/logout" method="post">
+      					<form action="/logout" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input class="logout-button nav navbar-nav" type="submit" value="Sign Out" />
 						</form>
