@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rootser.bluerootser.model.User;
-import com.rootser.bluerootser.model.UserWithPassword;
 import com.rootser.bluerootser.repository.UserRepository;
 
 @Service
