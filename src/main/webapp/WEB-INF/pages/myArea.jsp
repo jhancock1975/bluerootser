@@ -2,7 +2,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/jspfrag/bootstrap-head-elements.jspf" %>
-<link href="/bluerootser/resources/css/signin.css" rel="stylesheet">
+<link href="/resources/css/signin.css" rel="stylesheet">
+
 <title>My Area On Bluerootser</title>
 
 </head>
