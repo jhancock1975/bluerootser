@@ -10,7 +10,7 @@
 <body >
 <div class="container">
 <h2 class="form-signin-heading">Your Account Information</h2>
-<form class="form-signin"  id="updateUserForm"  >
+<form class="form-signin"  id="updateUserForm"  novalidate ng-submit="updateUser(updateUserForm.$valid)">
 	<p>Change any values below and click submit.  Changes will be saved to your account.</p> 
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	
@@ -25,10 +25,10 @@
 	<input type="password" name="password" id="inputPassword" class="form-control"/>
 	
 	<label for="newPassword1" class="sr-only">New Password</label>
-	<input type='password' name='newPassword1' id='inputNewPassword1' class='form-control' />
+	<input type='password' name='newPassword1' id='inputNewPassword1' class='form-control'/>
 	
 	<label for="newPassword2" class="sr-only">New Password</label>
-	<input type='password' name='newPassword2' id='inputNewPassword2' class='form-control' />
+	<input type='password' name='newPassword2' id='inputNewPassword2' class='form-control'/>
 	
 	<label for="inputDob" class="sr-only">Birthday</label>
 	<input type="text" name="dob" id="inputDob" class="form-control" value="${curUser.dob}" required/>
@@ -39,7 +39,7 @@
 	<label for="inputLastName" class="sr-only">Last Name</label>
 	<input type="text" name="lastName" id="inputLastName" class="form-control" value="${curUser.lastName}" required/>
 	
-	<button class="btn btn-lg btn-primary btn-block btn-signin" id="update" type="submit" ng-click="updateUser()">Update</button>
+	<button class="btn btn-lg btn-primary btn-block btn-signin" id="update" type="submit" >Update</button>
 </form>
 </div>
 <%@ include file="/jspfrag/common-footer.jspf"%>

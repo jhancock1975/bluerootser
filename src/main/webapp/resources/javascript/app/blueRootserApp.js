@@ -27,19 +27,19 @@ blueRootserApp.config(function($routeProvider) {
 		templateUrl : '/myArea',
 		controller  : 'myAreaController'
 	})
-	
+
 	// route for the update user form
 	.when('/updateUser', {
 		templateUrl : '/updateUser',
 		controller  : 'updateUser'
 	})
-	
+
 	// route for the memorization techniques page
 	.when('/memorizationTechniques', {
 		templateUrl : '/memorizationTechniques',
 		controller  : 'memorizationTechniquesController'
 	})
-	
+
 	// route for the help page
 	.when('/help', {
 		templateUrl : '/help',
@@ -76,22 +76,22 @@ blueRootserApp.controller('mainController', function($scope, $http) {
 
 blueRootserApp.directive("highlight", ['$http', function($http) {
 	return function(scope, element, attrs) {
-		
+
 		element.on('mouseup', function(event) {
 			console.log("mouse up");
-			
+
 		});
 		element.on("mousedown", function(event){
 			console.log("mouse down");
 		});
-		
+
 		zhongwenMain.loadDictionary();
 		zhongwenContent.enableTab();
 		window.zhongwen.config = zhongwenMain.config;
 		element.on("mousemove", function(event){
 			zhongwenContent.onMouseMove(event);
 		});
-		
+
 	}
 }]);
 
@@ -107,9 +107,34 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 	console.log("site help page");
 });
 
+var compareTo = function() {
+	return {
+		require: "ngModel",
+		scope: {
+			otherModelValue: "=compareTo"
+		},
+		link: function(scope, element, attributes, ngModel) {
+
+			ngModel.$validators.compareTo = function(modelValue) {
+				return modelValue == scope.otherModelValue;
+			};
+
+			scope.$watch("otherModelValue", function() {
+				ngModel.$validate();
+			});
+		}
+	};
+};
+
+blueRootserApp.directive("compareTo", compareTo);
+
 blueRootserApp.controller('myAreaController', function($scope, $http) {
 	console.log('in my area controller');
-	
+
+	var validate = function(postObject){
+
+	};
+
 	$scope.updateUser = function(){
 		//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
 		var postObject = new Object();
@@ -118,7 +143,12 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		postObject.firstName = $('#inputFirstName').val();
 		postObject.lastName = $('#inputLastName').val();
 		postObject.dob = $('#inputDob').val();
+		postObject.newPassword1 = $('inputNewPassword1');
+		postObject.newPassword2 = $('inputNewPassword2');
+
+
 		console.log(postObject);
+
 		//$http.defaults.headers.post['X-CSRF-TOKEN'] = $()
 		$http({
 			url: '/updateUser',
@@ -135,5 +165,5 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 			console.log('error');
 			console.log(error);
 		});
-    };
+	};
 });
