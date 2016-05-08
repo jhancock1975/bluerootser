@@ -13,7 +13,7 @@
 <h2 class="form-signin-heading">Your Account Information</h2>
 <form class="form-signin"  name="updateUserForm" id="updateUserForm"  novalidate ng-submit="updateUser(updateUserForm.$valid)">
 	<label>Change any values below and click submit.  Changes will be saved to your account.</label> 
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	<input type="hidden" id="${_csrf.parameterName}" value="${_csrf.token}"/>
 	
 	<input type="hidden"  name="curUserId" id="curUserId" value="${curUser.userName}"/>
 	

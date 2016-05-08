@@ -140,22 +140,22 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		$('#newPasswdLabel2').text('New Password (Again)');
 		$('#inputEmailLabel').text('Email address');
 		[$('#inputNewPassword1'), $('#inputNewPassword2'), $('inputEmail')].forEach(function(elt) {
-			elt.css('background-color', '#FFFFFF');
+			elt.removeClass('err');
 		});
 
-		if (! postObject.newPassword1 === postObject.newPassword2){
+		if (! (postObject.newPassword1 === postObject.newPassword2)){
 			valid=false;
 			$('#newPasswdLabel1').text('New passwords do not match.');
 			$('#newPasswdLabel2').text('New passwords do not match.');
-			$('#inputNewPassword1').css('background-color', errColor);
-			$('#inputNewPassword2').css('background-color', errColor);
+			$('#inputNewPassword1').addClass('err');
+			$('#inputNewPassword2').addClass('err');
 		} 
 		
 		var emailAddr = $('#inputEmail').val();
 		if ( isBlank(emailAddr) || emailAddr.indexOf('@') === -1){
 			valid = false;
 			$('#inputEmailLabel').text("Email address does not contain a '@' character");
-			$('#inputEmail').css('background-color', errColor);
+			$('#inputEmail').addClass('err');
 		}
 		return valid;
 	};
@@ -168,14 +168,14 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		postObject.firstName = $('#inputFirstName').val();
 		postObject.lastName = $('#inputLastName').val();
 		postObject.dob = $('#inputDob').val();
-		postObject.newPassword1 = $('inputNewPassword1');
-		postObject.newPassword2 = $('inputNewPassword2');
+		postObject.newPassword1 = $('#inputNewPassword1').val();
+		postObject.newPassword2 = $('#inputNewPassword2').val();
 
 
 		console.log(postObject);
 		
-		if (validate($(postObject, '#updateUserForm'))){
-			$http.defaults.headers.post['X-CSRF-TOKEN'] = $()
+		if (validate(postObject, $('#updateUserForm'))){
+			$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#_csrf').val();
 			$http({
 				url: '/updateUser',
 				dataType: 'json',
