@@ -131,8 +131,33 @@ blueRootserApp.directive("compareTo", compareTo);
 blueRootserApp.controller('myAreaController', function($scope, $http) {
 	console.log('in my area controller');
 
-	var validate = function(postObject){
+	var validate = function(postObject, form){
+		
+		var valid  = true;
+		var errColor='#FA93AA';
 
+		$('#newPasswdLabel1').text('New Password');
+		$('#newPasswdLabel2').text('New Password (Again)');
+		$('#inputEmailLabel').text('Email address');
+		[$('#inputNewPassword1'), $('#inputNewPassword2'), $('inputEmail')].forEach(function(elt) {
+			elt.css('background-color', '#FFFFFF');
+		});
+
+		if (! postObject.newPassword1 === postObject.newPassword2){
+			valid=false;
+			$('#newPasswdLabel1').text('New passwords do not match.');
+			$('#newPasswdLabel2').text('New passwords do not match.');
+			$('#inputNewPassword1').css('background-color', errColor);
+			$('#inputNewPassword2').css('background-color', errColor);
+		} 
+		
+		var emailAddr = $('#inputEmail').val();
+		if ( isBlank(emailAddr) || emailAddr.indexOf('@') === -1){
+			valid = false;
+			$('#inputEmailLabel').text("Email address does not contain a '@' character");
+			$('#inputEmail').css('background-color', errColor);
+		}
+		return valid;
 	};
 
 	$scope.updateUser = function(){
@@ -148,22 +173,24 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 
 
 		console.log(postObject);
-
-		//$http.defaults.headers.post['X-CSRF-TOKEN'] = $()
-		$http({
-			url: '/updateUser',
-			dataType: 'json',
-			method: 'POST',
-			data: postObject,
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-		.success(function (response){
-			console.log('success');
-		}).error(function(error){
-			console.log('error');
-			console.log(error);
-		});
+		
+		if (validate($(postObject, '#updateUserForm'))){
+			$http.defaults.headers.post['X-CSRF-TOKEN'] = $()
+			$http({
+				url: '/updateUser',
+				dataType: 'json',
+				method: 'POST',
+				data: postObject,
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+			.success(function (response){
+				console.log('success');
+			}).error(function(error){
+				console.log('error');
+				console.log(error);
+			});
+		}
 	};
 });
