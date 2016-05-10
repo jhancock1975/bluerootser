@@ -107,27 +107,6 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 	console.log("site help page");
 });
 
-var compareTo = function() {
-	return {
-		require: "ngModel",
-		scope: {
-			otherModelValue: "=compareTo"
-		},
-		link: function(scope, element, attributes, ngModel) {
-
-			ngModel.$validators.compareTo = function(modelValue) {
-				return modelValue == scope.otherModelValue;
-			};
-
-			scope.$watch("otherModelValue", function() {
-				ngModel.$validate();
-			});
-		}
-	};
-};
-
-blueRootserApp.directive("compareTo", compareTo);
-
 blueRootserApp.controller('myAreaController', function($scope, $http) {
 	console.log('in my area controller');
 
@@ -186,9 +165,10 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 				}
 			})
 			.success(function (response){
-				console.log('success');
+				console.log('Your account was updated successfully.');
 			}).error(function(error){
 				console.log('error');
+				$('#updateMessages').text('Server error updating account.');
 				console.log(error);
 			});
 		}
