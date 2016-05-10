@@ -12,8 +12,14 @@
 <div class="container">
 <h2 class="form-signin-heading">Your Account Information</h2>
 <form class="form-signin"  name="updateUserForm" id="updateUserForm"  >
-	<label id='updateMessages'>Change any values below and click submit.  Changes will be saved to your account.</label> 
-	<input type="hidden" id="${_csrf.parameterName}" value="${_csrf.token}"/>
+	<label id='updateMessages'>To update your account settings, 
+		enter your current password below, make changes,
+		and click on the update button. Changes will be saved to your account.</label> 
+		
+	<label for="inputPassword" >Current Password</label>
+	<input type="password" name="password" id="inputPassword" class="form-control"/>
+	 
+	<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 	
 	<input type="hidden"  name="curUserId" id="curUserId" value="${curUser.userName}"/>
 	
@@ -21,12 +27,8 @@
 	<input type="email" name="email" id="inputEmail" class="form-control" value="${curUser.email}" autofocus/>
 	
 	<div id="myAreaPasswdMsgDiv">
-		<label>To update your password, enter your current password.  Then, enter a new password twice to confirm the correct value.</label>
+		<label>To update your password please type the same password in twice.</label>
 	</div>
-	
-	<label for="inputPassword" >Current Password</label>
-	<input type="password" name="password" id="inputPassword" class="form-control"/>
-	
 	<label for="newPassword1" id='newPasswdLabel1' >New Password</label>
 	<input type='password' name='newPassword1' id='inputNewPassword1' class='form-control'/>
 	
@@ -42,6 +44,7 @@
 	<label for="inputLastName" >Last Name</label>
 	<input type="text" name="lastName" id="inputLastName" class="form-control" value="${curUser.lastName}" required/>
 	
+	<label> </label>
 	<button class="btn btn-lg btn-primary btn-block btn-signin" id="update" type="submit" ng-click="updateUser()">Update</button>
 </form>
 </div>

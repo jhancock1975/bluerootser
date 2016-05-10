@@ -154,7 +154,7 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		console.log(postObject);
 		
 		if (validate(postObject, $('#updateUserForm'))){
-			$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#_csrf').val();
+			$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#csrfToken').val();
 			$http({
 				url: '/updateUser',
 				dataType: 'json',
