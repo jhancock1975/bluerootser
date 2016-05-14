@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rootser.bluerootser.model.UpdateUserResult;
 import com.rootser.bluerootser.model.User;
 import com.rootser.bluerootser.service.UserService;
 
@@ -38,7 +39,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/updateUser") 
-	public User updateUser(@RequestBody User userObj){
+	public UpdateUserResult updateUser(@RequestBody User userObj){
 		return userService.updateUser(userObj);
 	}
 }

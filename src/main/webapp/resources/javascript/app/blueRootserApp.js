@@ -51,9 +51,6 @@ blueRootserApp.config(function($routeProvider) {
 
 //create the controller and inject Angular's $scope
 blueRootserApp.controller('mainController', function($scope, $http) {
-	// create a message to display in our view
-	$scope.message = 'Everyone come and see how good I look!';
-	$scope.onselect ="";
 
 	var data = {};
 	$http.defaults.headers.post['X-CSRF-TOKEN'] = csrfTokenVal;
@@ -165,10 +162,10 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 				}
 			})
 			.success(function (response){
-				console.log('Your account was updated successfully.');
+				$('#updateMessages').text(response.updateMsg);
 			}).error(function(error){
 				console.log('error');
-				$('#updateMessages').text('Server error updating account.');
+				$('#updateMessages').text(response.updateMsg);
 				console.log(error);
 			});
 		}
