@@ -112,26 +112,35 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		var valid  = true;
 		var errColor='#FA93AA';
 
-		$('#newPasswdLabel1').text('New Password');
+		$('#newPasswdLabel').text('New Password');
 		$('#newPasswdLabel2').text('New Password (Again)');
 		$('#inputEmailLabel').text('Email address');
 		[$('#inputNewPassword1'), $('#inputNewPassword2'), $('inputEmail')].forEach(function(elt) {
 			elt.removeClass('err');
 		});
+		$('#curPasswordLbl').text('Current Password');
+		
 
-		if (! (postObject.newPassword1 === postObject.newPassword2)){
+		if (! (postObject.newPassword === postObject.newPassword2)){
 			valid=false;
-			$('#newPasswdLabel1').text('New passwords do not match.');
+			$('#newPasswdLabel').text('New passwords do not match.');
 			$('#newPasswdLabel2').text('New passwords do not match.');
 			$('#inputNewPassword1').addClass('err');
 			$('#inputNewPassword2').addClass('err');
 		} 
 		
+
 		var emailAddr = $('#inputEmail').val();
 		if ( isBlank(emailAddr) || emailAddr.indexOf('@') === -1){
 			valid = false;
 			$('#inputEmailLabel').text("Email address does not contain a '@' character");
 			$('#inputEmail').addClass('err');
+		}
+		
+		if (isBlank(postObject.password)){
+			valid = false;
+			$('#inputPassword').addClass('err');
+			$('#curPasswordLbl').text(' Please enter your current password.');
 		}
 		return valid;
 	};
@@ -144,9 +153,9 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		postObject.firstName = $('#inputFirstName').val();
 		postObject.lastName = $('#inputLastName').val();
 		postObject.dob = $('#inputDob').val();
-		postObject.newPassword1 = $('#inputNewPassword1').val();
+		postObject.newPassword = $('#inputNewPassword').val();
 		postObject.newPassword2 = $('#inputNewPassword2').val();
-
+		postObject.password = $('#inputPassword').val();
 
 		console.log(postObject);
 		

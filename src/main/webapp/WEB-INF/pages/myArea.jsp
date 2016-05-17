@@ -16,7 +16,7 @@
 		enter your current password below, make changes,
 		and click on the update button. Changes will be saved to your account.</label> 
 		
-	<label for="inputPassword" >Current Password</label>
+	<label for="inputPassword" id='curPasswordLbl'>Current Password</label>
 	<input type="password" name="password" id="inputPassword" class="form-control"/>
 	 
 	<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
@@ -29,8 +29,8 @@
 	<div id="myAreaPasswdMsgDiv">
 		<label>To update your password please type the same password in twice.</label>
 	</div>
-	<label for="newPassword1" id='newPasswdLabel1' >New Password</label>
-	<input type='password' name='newPassword1' id='inputNewPassword1' class='form-control'/>
+	<label for="newPassword" id='newPasswdLabel' >New Password</label>
+	<input type='password' name='newPassword' id='inputNewPassword' class='form-control'/>
 	
 	<label for="newPassword2" id='newPasswdLabel2'>New Password (Again)</label>
 	<input type='password' name='newPassword2' id='inputNewPassword2' class='form-control'/>
