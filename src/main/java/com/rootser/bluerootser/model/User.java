@@ -82,12 +82,6 @@ public class User {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+  ", enabled=" + enabled + ", email=" + email + "]";
-	}
-
 	public Date getDob() {
 		return dob;
 	}
@@ -110,5 +104,12 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName + ", enabled="
+				+ enabled + ", email=" + email + ", dob=" + dob + ", newPassword=" + newPassword + ", password="
+				+ password + "]";
 	}
 }

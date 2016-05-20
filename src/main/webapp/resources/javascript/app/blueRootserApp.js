@@ -172,9 +172,11 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 			})
 			.success(function (response){
 				$('#updateMessages').text(response.updateMsg);
+				$('#updateMessages').addClass('successful');
 			}).error(function(error){
 				console.log('error');
 				$('#updateMessages').text(response.updateMsg);
+				$('#updateMessages').addClass('err');
 				console.log(error);
 			});
 		}
