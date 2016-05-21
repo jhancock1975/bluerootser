@@ -106,27 +106,49 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 
 blueRootserApp.controller('myAreaController', function($scope, $http) {
 	console.log('in my area controller');
+	
+	/*
+	 * we need this to avoid having multiple styles applied
+	 * to ensure we get the proper background color
+	 */
+	var setClass = function(elt, classname){
+		['normal', 'err', 'successful'].forEach(function(cssStyleName){
+			elt.removeClass(cssStyleName);
+		});
+		
+		elt.addClass(classname);
+	}
 
 	var validate = function(postObject, form){
 		
 		var valid  = true;
-		var errColor='#FA93AA';
+		
+		$('#updateMessages').text('To update your account settings, \
+		enter your current password below, make changes,\
+		and click on the update button. Changes will be saved to your account.');
+		
+		setClass($('#updateMessages'), 'normal');
 
 		$('#newPasswdLabel').text('New Password');
 		$('#newPasswdLabel2').text('New Password (Again)');
 		$('#inputEmailLabel').text('Email address');
-		[$('#inputNewPassword1'), $('#inputNewPassword2'), $('inputEmail')].forEach(function(elt) {
+		
+		[$('#inputPassword'), $('#inputNewPassword'), $('#inputNewPassword2'), $('inputEmail')].forEach(function(elt) {
 			elt.removeClass('err');
 		});
+		
 		$('#curPasswordLbl').text('Current Password');
 		
 
 		if (! (postObject.newPassword === postObject.newPassword2)){
 			valid=false;
-			$('#newPasswdLabel').text('New passwords do not match.');
-			$('#newPasswdLabel2').text('New passwords do not match.');
-			$('#inputNewPassword1').addClass('err');
-			$('#inputNewPassword2').addClass('err');
+			[$('#newPasswdLabel'), $('#newPasswdLabel2')].forEach(function(elt){
+				elt.text('New passwords do not match.');
+			});
+			
+			[$('#inputNewPassword'), $('#inputNewPassword2')].forEach(function(elt){
+				setClass(elt, 'err');
+			});
 		} 
 		
 
@@ -172,7 +194,11 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 			})
 			.success(function (response){
 				$('#updateMessages').text(response.updateMsg);
-				$('#updateMessages').addClass('successful');
+				if (response.updateStatus === true){
+					setClass($('#updateMessages'), 'successful');
+				} else {
+					setClass($('#updateMessages'), 'err');
+				}
 			}).error(function(error){
 				console.log('error');
 				$('#updateMessages').text(response.updateMsg);

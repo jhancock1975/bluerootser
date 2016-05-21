@@ -12,7 +12,7 @@
 <div class="container">
 <h2 class="form-signin-heading">Your Account Information</h2>
 <form class="form-signin"  name="updateUserForm" id="updateUserForm"  >
-	<label id='updateMessages'>To update your account settings, 
+	<label id='updateMessages' class='normal'>To update your account settings, 
 		enter your current password below, make changes,
 		and click on the update button. Changes will be saved to your account.</label> 
 		

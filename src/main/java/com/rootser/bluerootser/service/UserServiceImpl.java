@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.rootser.bluerootser.model.UpdateUserResult;
@@ -53,12 +54,13 @@ public class UserServiceImpl implements UserService{
 			return new ImmutablePair<String,Boolean>("Your account is not updated.  You gave invalid security credentials.", false);
 		}
 
-		if (! meetsCriteria(existingPassword)){
+		String newPassword = existingUser.getNewPassword();
+		if (StringUtils.isNotBlank(newPassword) && ! meetsCriteria(existingUser.getNewPassword())){
 			return new ImmutablePair<String,Boolean>("The password you supplied is not secure enough. Please use a password that\n"
 					+ "contains at least 8 characters.", false);
 		}
 
-		return new ImmutablePair<String, Boolean>("", false);
+		return new ImmutablePair<String, Boolean>("", true);
 
 	}
 	/**
@@ -73,7 +75,7 @@ public class UserServiceImpl implements UserService{
 	public UpdateUserResult updateUser(User updateUser) {
 		Pair<String,Boolean> validationResult = validate(updateUser);
 		if (! validationResult.getRight()){
-			return new UpdateUserResult(validationResult.getLeft(), updateUser);
+			return new UpdateUserResult(validationResult.getLeft(), updateUser, validationResult.getRight());
 		} else {
 			String updateUserName = updateUser.getUserName();
 
@@ -85,27 +87,30 @@ public class UserServiceImpl implements UserService{
 			if (updateDob != null){
 				existingUser.setDob(updateUser.getDob());
 			}
-			
+
 			String updateEmail = updateUser.getEmail();
 			if (StringUtils.isNotBlank(updateEmail)){
 				existingUser.setEmail(updateEmail);
 			}
-			
+
 			String updateFName = updateUser.getFirstName();
 			if (StringUtils.isNotBlank(updateFName)){
 				existingUser.setFirstName(updateFName);
 			}
-			
+
 			String updateLName = updateUser.getLastName();
 			if (StringUtils.isNotBlank(updateLName)){
 				existingUser.setLastName(updateLName);
 			}
-			try {
-			userRepo.save(existingUser);
 			
-			} catch(find out what's the best exception to catch){
+			try {
+				userRepo.save(existingUser);
+			} catch(DataAccessException e){
+				return new UpdateUserResult("Your account was not updated successfully due to an internal error.", updateUser, false);
 			}
-			return new UpdateUserResult("Your account is updated successfully.", updateUser);
+			
+			
+			return new UpdateUserResult("Your account is updated successfully.", updateUser, true);
 		} 
 	}
 }
