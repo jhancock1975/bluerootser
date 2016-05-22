@@ -5,29 +5,24 @@
 <link href="/resources/css/signin.css" rel="stylesheet">
 <link href="/resources/css/myArea.css" rel="stylesheet">
 
-<title>My Area On Bluerootser</title>
+<title>Create A New Account</title>
 
 </head>
 <body >
 <div class="container">
 <h2 class="form-signin-heading">Your Account Information</h2>
 <form class="form-signin"  name="updateUserForm" id="updateUserForm"  >
-	<label id='updateMessages' class='normal'>To update your account settings, 
-		enter your current password below, make changes,
-		and click on the update button. Changes will be saved to your account.</label> 
+	<label id='updateMessages' class='normal'>To create a new account, 
+		please fill out the form below.</label> 
 		
-	<label for="inputPassword" id='curPasswordLbl'>Current Password</label>
-	<input type="password" name="password" id="inputPassword" class="form-control"/>
-	 
 	<input type="hidden" id="csrfToken" value="${_csrf.token}"/>
 	
-	<input type="hidden"  name="curUserId" id="curUserId" value="${curUser.userName}"/>
-	
+	<!-- the user name will be the e-mail address -->
 	<label for="inputEmail" id="inputEmailLabel">Email address</label>
 	<input type="email" name="email" id="inputEmail" class="form-control" value="${curUser.email}" autofocus/>
 	
 	<div id="myAreaPasswdMsgDiv">
-		<label>To update your password please type the same password in twice.</label>
+		<label>Please type the same password in twice.</label>
 	</div>
 	<label for="newPassword" id='newPasswdLabel' >New Password</label>
 	<input type='password' name='newPassword' id='inputNewPassword' class='form-control'/>
@@ -36,16 +31,16 @@
 	<input type='password' name='newPassword2' id='inputNewPassword2' class='form-control'/>
 	
 	<label for="inputDob" >Birthday</label>
-	<input type="text" name="dob" id="inputDob" class="form-control" value="${curUser.dob}" required/>
+	<input type="text" name="dob" id="inputDob" class="form-control" value="${curUser.dob}"/>
 	
 	<label for="inputFirstName" >First Name</label>
-	<input type="text" name="firstName" id="inputFirstName" class="form-control" value="${curUser.firstName}" required/>
+	<input type="text" name="firstName" id="inputFirstName" class="form-control" value="${curUser.firstName}" />
 	
 	<label for="inputLastName" >Last Name</label>
-	<input type="text" name="lastName" id="inputLastName" class="form-control" value="${curUser.lastName}" required/>
+	<input type="text" name="lastName" id="inputLastName" class="form-control" value="${curUser.lastName}" />
 	
-	
-		<button class="btn btn-lg btn-primary btn-block btn-signin" id="update" type="submit" ng-click="updateUser()">Update</button>
+	<label> </label>
+		<button class="btn btn-lg btn-primary btn-block btn-signin" id="create" type="submit" ng-click="createUser()">Sign Up</button>
 </form>
 </div>
 <%@ include file="/jspfrag/common-footer.jspf"%>

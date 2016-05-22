@@ -23,7 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/" + Constants.resources.toString(), 
                 		"/" +  Constants.articles.toString(),
                 		"/" + Constants.help.toString(), 
-                		"/" + Constants.memorizationTechniques.toString())
+                		"/" + Constants.memorizationTechniques.toString(),
+                		"/" + Constants.myArea.toString())
              .permitAll()
                 .anyRequest().authenticated()
                 .and()

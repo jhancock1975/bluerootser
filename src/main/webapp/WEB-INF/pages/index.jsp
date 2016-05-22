@@ -38,8 +38,7 @@
                         <a href="#/">Home</a>
                     </li>
                     <sec:authorize access="isAuthenticated()">
-                    <li>
-      					<form action="/logout" method="post">
+                    <li><form action="/logout" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<input class="logout-button nav navbar-nav" type="submit" value="Sign Out" />
 						</form>
@@ -51,6 +50,9 @@
 					<sec:authorize access="!isAuthenticated()">
                     <li>
                         <a href="#login">Log In</a>
+                    </li>
+                    <li>
+                        <a href="#signup">Sign Up</a>
                     </li>
                     </sec:authorize>
                      <li>

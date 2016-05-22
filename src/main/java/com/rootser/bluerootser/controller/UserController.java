@@ -36,10 +36,20 @@ public class UserController {
 	 * to the userService
 	 * 
 	 * @param userObj
-	 * @return
+	 * @return updateUserResult - object with user and operation result information
 	 */
 	@RequestMapping("/updateUser") 
 	public UpdateUserResult updateUser(@RequestBody User userObj){
 		return userService.updateUser(userObj);
+	}
+	
+	/**
+	 * handles signup page
+	 * @param userObj
+	 * @return
+	 */
+	@RequestMapping("/createUser") 
+	public UpdateUserResult creaateUser(@RequestBody User userObj){
+		return userService.createUser(userObj);
 	}
 }

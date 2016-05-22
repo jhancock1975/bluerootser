@@ -44,6 +44,12 @@ blueRootserApp.config(function($routeProvider) {
 	.when('/help', {
 		templateUrl : '/help',
 		controller  : 'helpController'
+	})
+	
+	// route for the help page
+	.when('/signup', {
+		templateUrl : '/signup',
+		controller  : 'signupController'
 	});
 
 });
@@ -101,32 +107,125 @@ blueRootserApp.controller('helpController', function($scope) {
 });
 
 blueRootserApp.controller('memorizationTechniquesController', function($scope) {
-	console.log("site help page");
+	console.log("memorization techniques page");
 });
 
+blueRootserApp.controller('signupController', function($scope) {
+	console.log("signup page");
+	
+	var resetForm = function(postObject, form){
+		$('#updateMessages').text('To create a new account,\
+				please fill out the form below.');
+				
+		setClass($('#updateMessages'), 'normal');
+
+		$('#newPasswdLabel').text('New Password');
+		$('#newPasswdLabel2').text('New Password (Again)');
+		$('#inputEmailLabel').text('Email address');
+		
+		[$('#inputPassword'), $('#inputNewPassword'), $('#inputNewPassword2'), $('inputEmail')].forEach(function(elt) {
+			elt.removeClass('err');
+		});
+
+	};
+	
+	$scope.createUser = function(){
+		var postObject = new Object();
+		
+		postObject.userName = $('#inputEmail').val();
+		postObject.firstName = $('#inputFirstName').val();
+		postObject.lastName = $('#inputLastName').val();
+		postObject.dob = $('#inputDob').val();
+		postObject.newPassword = $('#inputNewPassword').val();
+		postObject.newPassword2 = $('#inputNewPassword2').val();
+		postObject.password = $('#inputPassword').val();
+		
+		resetForm(postObject, form);
+		updateUser('/createUser');
+	};
+});
+
+var validate = function(postObject, form){
+	
+	var valid  = true;		
+
+	if (! (postObject.newPassword === postObject.newPassword2)){
+		valid=false;
+		[$('#newPasswdLabel'), $('#newPasswdLabel2')].forEach(function(elt){
+			elt.text('New passwords do not match.');
+		});
+		
+		[$('#inputNewPassword'), $('#inputNewPassword2')].forEach(function(elt){
+			setClass(elt, 'err');
+		});
+	} 
+	
+
+	var emailAddr = $('#inputEmail').val();
+	if ( isBlank(emailAddr) || emailAddr.indexOf('@') === -1){
+		valid = false;
+		$('#inputEmailLabel').text("Email address does not contain a '@' character");
+		$('#inputEmail').addClass('err');
+	}
+	
+	if (isBlank(postObject.password)){
+		valid = false;
+		$('#inputPassword').addClass('err');
+		$('#curPasswordLbl').text(' Please enter your current password.');
+	}
+	return valid;
+};
+
+/*
+ * we need this to avoid having multiple styles applied
+ * to ensure we get the proper background color
+ */
+var setClass = function(elt, classname){
+	['normal', 'err', 'successful'].forEach(function(cssStyleName){
+		elt.removeClass(cssStyleName);
+	});
+	
+	elt.addClass(classname);
+}
+
+var updateUser = function(restOperation){
+		
+	if (validate(postObject, $('#updateUserForm'))){
+		$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#csrfToken').val();
+		$http({
+			url: restOperation,
+			dataType: 'json',
+			method: 'POST',
+			data: postObject,
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.success(function (response){
+			$('#updateMessages').text(response.updateMsg);
+			if (response.updateStatus === true){
+				setClass($('#updateMessages'), 'successful');
+			} else {
+				setClass($('#updateMessages'), 'err');
+			}
+		}).error(function(error){
+			console.log('error');
+			$('#updateMessages').text(response.updateMsg);
+			setClass($('#updateMessages'), 'err');
+			console.log(error);
+		});
+	}
+};
 blueRootserApp.controller('myAreaController', function($scope, $http) {
 	console.log('in my area controller');
 	
-	/*
-	 * we need this to avoid having multiple styles applied
-	 * to ensure we get the proper background color
-	 */
-	var setClass = function(elt, classname){
-		['normal', 'err', 'successful'].forEach(function(cssStyleName){
-			elt.removeClass(cssStyleName);
-		});
-		
-		elt.addClass(classname);
-	}
-
-	var validate = function(postObject, form){
-		
-		var valid  = true;
-		
+	
+	
+	var resetForm = function(postObject, form){
 		$('#updateMessages').text('To update your account settings, \
-		enter your current password below, make changes,\
-		and click on the update button. Changes will be saved to your account.');
-		
+				enter your current password below, make changes,\
+				and click on the update button. Changes will be saved to your account.');
+				
 		setClass($('#updateMessages'), 'normal');
 
 		$('#newPasswdLabel').text('New Password');
@@ -138,36 +237,11 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		});
 		
 		$('#curPasswordLbl').text('Current Password');
-		
 
-		if (! (postObject.newPassword === postObject.newPassword2)){
-			valid=false;
-			[$('#newPasswdLabel'), $('#newPasswdLabel2')].forEach(function(elt){
-				elt.text('New passwords do not match.');
-			});
-			
-			[$('#inputNewPassword'), $('#inputNewPassword2')].forEach(function(elt){
-				setClass(elt, 'err');
-			});
-		} 
-		
-
-		var emailAddr = $('#inputEmail').val();
-		if ( isBlank(emailAddr) || emailAddr.indexOf('@') === -1){
-			valid = false;
-			$('#inputEmailLabel').text("Email address does not contain a '@' character");
-			$('#inputEmail').addClass('err');
-		}
-		
-		if (isBlank(postObject.password)){
-			valid = false;
-			$('#inputPassword').addClass('err');
-			$('#curPasswordLbl').text(' Please enter your current password.');
-		}
-		return valid;
-	};
+	}
 
 	$scope.updateUser = function(){
+
 		//http://stackoverflow.com/questions/29867310/angularjs-does-not-post-json-data-to-rest-api
 		var postObject = new Object();
 		postObject.userName = $('#curUserId').val();
@@ -180,31 +254,8 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		postObject.password = $('#inputPassword').val();
 
 		console.log(postObject);
-		
-		if (validate(postObject, $('#updateUserForm'))){
-			$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#csrfToken').val();
-			$http({
-				url: '/updateUser',
-				dataType: 'json',
-				method: 'POST',
-				data: postObject,
-				headers: {
-					"Content-Type": "application/json"
-				}
-			})
-			.success(function (response){
-				$('#updateMessages').text(response.updateMsg);
-				if (response.updateStatus === true){
-					setClass($('#updateMessages'), 'successful');
-				} else {
-					setClass($('#updateMessages'), 'err');
-				}
-			}).error(function(error){
-				console.log('error');
-				$('#updateMessages').text(response.updateMsg);
-				$('#updateMessages').addClass('err');
-				console.log(error);
-			});
-		}
-	};
+
+		resetForm(postObject, form);
+		updateUser('/updateUser'); 
+	}
 });

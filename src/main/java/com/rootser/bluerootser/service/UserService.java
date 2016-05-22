@@ -10,4 +10,6 @@ public interface UserService {
 
 	public UpdateUserResult updateUser(User userObj);
 
+	public UpdateUserResult createUser(User userObj);
+
 }
