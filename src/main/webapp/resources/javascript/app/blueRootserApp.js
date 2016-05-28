@@ -110,10 +110,10 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 	console.log("memorization techniques page");
 });
 
-blueRootserApp.controller('signupController', function($scope) {
+blueRootserApp.controller('signupController', function($scope, $http) {
 	console.log("signup page");
 	
-	var resetForm = function(postObject, form){
+	var resetForm = function(postObject){
 		$('#updateMessages').text('To create a new account,\
 				please fill out the form below.');
 				
@@ -133,19 +133,20 @@ blueRootserApp.controller('signupController', function($scope) {
 		var postObject = new Object();
 		
 		postObject.userName = $('#inputEmail').val();
+		postObject.email = $('#inputEmail').val();
 		postObject.firstName = $('#inputFirstName').val();
 		postObject.lastName = $('#inputLastName').val();
 		postObject.dob = $('#inputDob').val();
 		postObject.newPassword = $('#inputNewPassword').val();
 		postObject.newPassword2 = $('#inputNewPassword2').val();
-		postObject.password = $('#inputPassword').val();
+		postObject.password = $('#inputNewPassword').val();
 		
-		resetForm(postObject, form);
-		updateUser('/createUser');
+		resetForm(postObject);
+		updateUser('/createUser', postObject, $http);
 	};
 });
 
-var validate = function(postObject, form){
+var validate = function(postObject){
 	
 	var valid  = true;		
 
@@ -188,7 +189,7 @@ var setClass = function(elt, classname){
 	elt.addClass(classname);
 }
 
-var updateUser = function(restOperation){
+var updateUser = function(restOperation, postObject, $http){
 		
 	if (validate(postObject, $('#updateUserForm'))){
 		$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#csrfToken').val();
@@ -221,7 +222,7 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 	
 	
 	
-	var resetForm = function(postObject, form){
+	var resetForm = function(postObject){
 		$('#updateMessages').text('To update your account settings, \
 				enter your current password below, make changes,\
 				and click on the update button. Changes will be saved to your account.');
@@ -255,7 +256,7 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 
 		console.log(postObject);
 
-		resetForm(postObject, form);
-		updateUser('/updateUser'); 
+		resetForm(postObject);
+		updateUser('/updateUser', postObject, $http); 
 	}
 });

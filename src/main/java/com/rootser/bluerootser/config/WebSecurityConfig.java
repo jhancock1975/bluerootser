@@ -24,7 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/" +  Constants.articles.toString(),
                 		"/" + Constants.help.toString(), 
                 		"/" + Constants.memorizationTechniques.toString(),
-                		"/" + Constants.myArea.toString())
+                		"/" + Constants.signup.toString(),
+                		"/" + Constants.createUser.toString())
              .permitAll()
                 .anyRequest().authenticated()
                 .and()

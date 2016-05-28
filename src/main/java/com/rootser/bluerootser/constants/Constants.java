@@ -17,4 +17,6 @@ public class Constants {
 	public static final String help = "help";
 	public static final String memorizationTechniques = "memorizationTechniques";
 	public static final String myArea = "myArea";
+	public static final String signup = "signup";
+	public static final String createUser = "createUser";
 }

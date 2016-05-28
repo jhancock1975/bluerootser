@@ -109,8 +109,47 @@ public class UserServiceImpl implements UserService{
 				return new UpdateUserResult("Your account was not updated successfully due to an internal error.", updateUser, false);
 			}
 			
-			
 			return new UpdateUserResult("Your account is updated successfully.", updateUser, true);
 		} 
+	}
+
+	@Override
+	public UpdateUserResult createUser(User userObj) {
+		Pair<String,Boolean> validationResult = validateForCreate(userObj);
+		if (! validationResult.getRight()){
+			return new UpdateUserResult(validationResult.getLeft(), userObj, validationResult.getRight());
+		} else {
+			try {
+				userRepo.save(userObj);
+			} catch(DataAccessException e){
+				return new UpdateUserResult("Your account was not created successfully due to an internal error.", userObj, false);
+			}
+			
+			return new UpdateUserResult("Your account is updated successfully.", userObj, true);
+		}
+	}
+
+	private Pair<String, Boolean> validateForCreate(User userObj) {
+		if (userObj  == null){
+			return new ImmutablePair<String, Boolean>("Server side error. " + 
+					"We are unable to create your account at this time.", 
+					false);
+		}
+		String userName = userObj.getUserName();
+		if (StringUtils.isBlank(userName) || userName.length() < 7){
+			return new ImmutablePair<String, Boolean>("You did not give us a workable user name.  Please try something else", false);
+		}
+		
+		List<User> existingUserList = userRepo.findByUserName(userName);
+		if (existingUserList != null && existingUserList.size() > 0){
+			return new ImmutablePair<String,Boolean>("Please try another user name.", false);
+		}
+		
+		if (! meetsCriteria(userObj.getPassword())){
+			return new ImmutablePair<String, Boolean>("The password you entered is not strong enough. " +
+					"Please use a password that is at least 7 characters.", false);
+		}
+		
+		return new ImmutablePair<String, Boolean>("", true);
 	}
 }

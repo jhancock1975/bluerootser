@@ -19,12 +19,12 @@
 	
 	<!-- the user name will be the e-mail address -->
 	<label for="inputEmail" id="inputEmailLabel">Email address</label>
-	<input type="email" name="email" id="inputEmail" class="form-control" value="${curUser.email}" autofocus/>
+	<input type="email" name="email" id="inputEmail" class="form-control" autofocus/>
 	
 	<div id="myAreaPasswdMsgDiv">
 		<label>Please type the same password in twice.</label>
 	</div>
-	<label for="newPassword" id='newPasswdLabel' >New Password</label>
+	<label for="newPassword" id='inputPassword' >New Password</label>
 	<input type='password' name='newPassword' id='inputNewPassword' class='form-control'/>
 	
 	<label for="newPassword2" id='newPasswdLabel2'>New Password (Again)</label>
