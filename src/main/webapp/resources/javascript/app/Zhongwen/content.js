@@ -119,7 +119,7 @@ var zhongwenContent = {
             css.setAttribute('rel', 'stylesheet');
             css.setAttribute('type', 'text/css');
             var cssdoc = window.zhongwen.config.css;
-            css.setAttribute('href', '/bluerootser/resources/css/popup-' +
+            css.setAttribute('href', '/resources/css/popup-' +
                 cssdoc + '.css');
             css.setAttribute('id', 'zhongwen-css');
             topdoc.getElementsByTagName('head')[0].appendChild(css);
