@@ -142,7 +142,7 @@ blueRootserApp.controller('signupController', function($scope, $http, $location)
 		postObject.password = $('#inputNewPassword').val();
 		
 		resetForm(postObject);
-		updateUser('/createUser', postObject, $http, $location, $scope);
+		updateUser('/createUser', postObject, $http, $location, $scope, '/');
 	};
 });
 
@@ -189,7 +189,7 @@ var setClass = function(elt, classname){
 	elt.addClass(classname);
 }
 
-var updateUser = function(restOperation, postObject, $http, $location, $scope){
+var updateUser = function(restOperation, postObject, $http, $location, $scope, pathStr){
 		
 	if (validate(postObject, $('#updateUserForm'))){
 		$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#csrfToken').val();
@@ -206,8 +206,7 @@ var updateUser = function(restOperation, postObject, $http, $location, $scope){
 			$('#updateMessages').text(response.updateMsg);
 			if (response.updateStatus === true){
 				setClass($('#updateMessages'), 'successful');
-				$location.path('/');
-				//$scope.$apply();
+				$location.path(pathStr);
 			} else {
 				setClass($('#updateMessages'), 'err');
 			}
@@ -219,7 +218,7 @@ var updateUser = function(restOperation, postObject, $http, $location, $scope){
 		});
 	}
 };
-blueRootserApp.controller('myAreaController', function($scope, $http) {
+blueRootserApp.controller('myAreaController', function($scope, $http, $location) {
 	console.log('in my area controller');
 	
 	
@@ -259,6 +258,6 @@ blueRootserApp.controller('myAreaController', function($scope, $http) {
 		console.log(postObject);
 
 		resetForm(postObject);
-		updateUser('/updateUser', postObject, $http); 
+		updateUser('/updateUser', postObject, $http, $location, '/myArea'); 
 	}
 });

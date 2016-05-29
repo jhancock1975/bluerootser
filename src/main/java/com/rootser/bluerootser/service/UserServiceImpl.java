@@ -103,6 +103,11 @@ public class UserServiceImpl implements UserService{
 				existingUser.setLastName(updateLName);
 			}
 			
+			String updatePassword = updateUser.getNewPassword();
+			if (StringUtils.isNotBlank(updatePassword)){
+				existingUser.setPassword(updatePassword);
+			}
+			
 			try {
 				userRepo.save(existingUser);
 			} catch(DataAccessException e){
@@ -120,6 +125,7 @@ public class UserServiceImpl implements UserService{
 			return new UpdateUserResult(validationResult.getLeft(), userObj, validationResult.getRight());
 		} else {
 			try {
+				userObj.setEnabled(true);
 				userRepo.save(userObj);
 			} catch(DataAccessException e){
 				return new UpdateUserResult("Your account was not created successfully due to an internal error.", userObj, false);
