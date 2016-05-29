@@ -110,7 +110,7 @@ blueRootserApp.controller('memorizationTechniquesController', function($scope) {
 	console.log("memorization techniques page");
 });
 
-blueRootserApp.controller('signupController', function($scope, $http) {
+blueRootserApp.controller('signupController', function($scope, $http, $location) {
 	console.log("signup page");
 	
 	var resetForm = function(postObject){
@@ -142,7 +142,7 @@ blueRootserApp.controller('signupController', function($scope, $http) {
 		postObject.password = $('#inputNewPassword').val();
 		
 		resetForm(postObject);
-		updateUser('/createUser', postObject, $http);
+		updateUser('/createUser', postObject, $http, $location, $scope);
 	};
 });
 
@@ -189,7 +189,7 @@ var setClass = function(elt, classname){
 	elt.addClass(classname);
 }
 
-var updateUser = function(restOperation, postObject, $http){
+var updateUser = function(restOperation, postObject, $http, $location, $scope){
 		
 	if (validate(postObject, $('#updateUserForm'))){
 		$http.defaults.headers.post['X-CSRF-TOKEN'] = $('#csrfToken').val();
@@ -206,6 +206,8 @@ var updateUser = function(restOperation, postObject, $http){
 			$('#updateMessages').text(response.updateMsg);
 			if (response.updateStatus === true){
 				setClass($('#updateMessages'), 'successful');
+				$location.path('/');
+				//$scope.$apply();
 			} else {
 				setClass($('#updateMessages'), 'err');
 			}
