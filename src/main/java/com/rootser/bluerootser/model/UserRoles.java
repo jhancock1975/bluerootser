@@ -11,6 +11,11 @@ import javax.persistence.Table;
 @Table(name="user_roles")
 public class UserRoles {
 	
+	public UserRoles(String userName, String role){
+		this.username = userName;
+		this.role = role;
+	}
+	
 	public UserRoles(Integer id, Date updated, Date created, String username, String role) {
 		super();
 		this.id = id;

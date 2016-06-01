@@ -210,11 +210,11 @@ var updateUser = function(restOperation, postObject, $http, $location, $scope, p
 			} else {
 				setClass($('#updateMessages'), 'err');
 			}
-		}).error(function(error){
+		}).error(function(response){
 			console.log('error');
 			$('#updateMessages').text(response.updateMsg);
 			setClass($('#updateMessages'), 'err');
-			console.log(error);
+			console.log(response);
 		});
 	}
 };

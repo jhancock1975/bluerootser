@@ -10,14 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.rootser.bluerootser.constants.Constants;
 import com.rootser.bluerootser.model.UpdateUserResult;
 import com.rootser.bluerootser.model.User;
+import com.rootser.bluerootser.model.UserRoles;
 import com.rootser.bluerootser.repository.UserRepository;
+import com.rootser.bluerootser.repository.UserRolesRepository;
 
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	UserRolesRepository userRolesRepo;
+	
 	public List<User> getUser(String userId){
 		return userRepo.findByUserName(userId);
 	}
@@ -125,6 +132,8 @@ public class UserServiceImpl implements UserService{
 			return new UpdateUserResult(validationResult.getLeft(), userObj, validationResult.getRight());
 		} else {
 			try {
+				UserRoles newRole = new UserRoles(userObj.getUserName(), Constants.ROLE_USER);
+				userRolesRepo.save(newRole);
 				userObj.setEnabled(true);
 				userRepo.save(userObj);
 			} catch(DataAccessException e){
