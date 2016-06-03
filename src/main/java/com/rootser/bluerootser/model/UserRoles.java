@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,6 +28,7 @@ public class UserRoles {
 	}
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name="id")
 	Integer id;
 	

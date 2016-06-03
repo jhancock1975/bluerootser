@@ -132,10 +132,10 @@ public class UserServiceImpl implements UserService{
 			return new UpdateUserResult(validationResult.getLeft(), userObj, validationResult.getRight());
 		} else {
 			try {
+				userObj.setEnabled(true);
+				userRepo.save(userObj); 
 				UserRoles newRole = new UserRoles(userObj.getUserName(), Constants.ROLE_USER);
 				userRolesRepo.save(newRole);
-				userObj.setEnabled(true);
-				userRepo.save(userObj);
 			} catch(DataAccessException e){
 				return new UpdateUserResult("Your account was not created successfully due to an internal error.", userObj, false);
 			}
