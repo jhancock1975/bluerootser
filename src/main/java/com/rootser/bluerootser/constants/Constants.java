@@ -20,4 +20,5 @@ public class Constants {
 	public static final String signup = "signup";
 	public static final String createUser = "createUser";
 	public static final String ROLE_USER = "ROLE_USER";
+	public static final String ERROR = "error";
 }

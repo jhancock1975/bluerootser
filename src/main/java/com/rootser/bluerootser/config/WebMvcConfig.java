@@ -55,6 +55,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
         registry.addViewController("/help").setViewName("helpView");
         registry.addViewController("/" + Constants.signup).setViewName(Constants.signup);
         registry.addViewController(Constants.memorizationTechniques).setViewName("memorizationTechniques");
+        registry.addViewController(Constants.ERROR).setViewName("/");
     }
 
     
