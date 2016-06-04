@@ -12,9 +12,3 @@
   </div>
   <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
 </form>
-<div class='signin-div'>
-<form class='form-signin signin-div' action='#signup' method="get"><p>Not A member?</p>
- 	<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign Up</button> 
-</form>
-
-</div>

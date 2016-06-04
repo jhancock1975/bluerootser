@@ -142,7 +142,7 @@ blueRootserApp.controller('signupController', function($scope, $http, $location)
 		postObject.password = $('#inputNewPassword').val();
 		
 		resetForm(postObject);
-		updateUser('/createUser', postObject, $http, $location, $scope, '/');
+		updateUser('/createUser', postObject, $http, $location, $scope, '/login');
 	};
 });
 
