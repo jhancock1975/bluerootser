@@ -1,4 +1,10 @@
 package com.rootser.bluerootser.controller;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import com.rootser.bluerootser.logging.InjectLogger;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -10,14 +16,13 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-
 /**
  * Basic Controller which is called for unhandled errors
  */
 @Controller
 public class AppErrorController implements ErrorController{
+	
+	@InjectLogger  Logger logger;
 
     /**
      * Error Attributes in the Application
@@ -41,7 +46,9 @@ public class AppErrorController implements ErrorController{
      */
     @RequestMapping(value = ERROR_PATH, produces = "text/html")
     public ModelAndView errorHtml(HttpServletRequest request) {
-        return new ModelAndView("/errors/error", getErrorAttributes(request, false));
+    	logger.error("invoked error mapping for request " + request.getRequestURI());
+        
+    	return new ModelAndView("index", getErrorAttributes(request, false));
     }
 
     /**
@@ -52,6 +59,9 @@ public class AppErrorController implements ErrorController{
     @RequestMapping(value = ERROR_PATH)
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+    	
+    	logger.error("invoked error mapping for request " + request.getRequestURI());
+    	
         Map<String, Object> body = getErrorAttributes(request, getTraceParameter(request));
         HttpStatus status = getStatus(request);
         return new ResponseEntity<Map<String, Object>>(body, status);
