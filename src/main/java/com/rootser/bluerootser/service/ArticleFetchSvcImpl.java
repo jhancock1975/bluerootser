@@ -30,7 +30,8 @@ public class ArticleFetchSvcImpl implements ArticleFetchSvc {
 			for (String url: urls){
 				logger.debug(url);
 				Document articleDoc = Jsoup.connect(url).userAgent(USER_AGENT).get();
-				result.add(new Article(url, articleDoc.select(tagSelector).html()));
+				articleDoc = fixRelativeUrls(articleDoc, tagSelector, baseUrl);
+				result.add(new Article(url, articleDoc.html()));
 				if (++count > numArticles){
 					break;
 				}
@@ -39,6 +40,31 @@ public class ArticleFetchSvcImpl implements ArticleFetchSvc {
 			logger.debug("i/o exception connecting to url ", e);
 		}
 		return result;
+	}
+
+	/**
+	 * added this after we saw html of articles containing image elements with
+	 * relative paths in src attribute
+	 * 
+	 * images with relative paths then get sent back to browser
+	 * 
+	 * browser sends requests for images to us, which we cannot serve
+	 * 
+	 * this hack sticks the base url back onto the src attribute 
+	 * 
+	 * @param articleDoc
+	 * @param tagSelector
+	 * @param baseUrl
+	 * @return
+	 */
+	private Document fixRelativeUrls(Document articleDoc, String tagSelector, String baseUrl) {
+		Document articleHtmlDoc = Jsoup.parse(articleDoc.select(tagSelector).html());
+		for (Element imgElt : articleHtmlDoc.select("img")){
+			if (imgElt.absUrl("src").trim().startsWith("/")){
+				imgElt.setBaseUri(baseUrl);
+			}
+		}
+		return articleHtmlDoc;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.rootser.bluerootser.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.rootser.bluerootser.aspect.LoggingAspect;
 import com.rootser.bluerootser.constants.Constants;
+import com.rootser.bluerootser.controller.AppErrorController;
  
 @Configuration
 @EnableWebMvc
@@ -43,6 +46,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
     public LoggingAspect loggingAspect(){
     	return new LoggingAspect();
     }
+    
+    @Autowired
+    private ErrorAttributes errorAttributes;
+
+    @Bean
+    public AppErrorController appErrorController(){return new AppErrorController(errorAttributes);}
     
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
