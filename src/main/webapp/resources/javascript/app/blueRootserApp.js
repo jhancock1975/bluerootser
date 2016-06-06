@@ -100,6 +100,11 @@ blueRootserApp.directive("highlight", ['$http', function($http) {
 
 blueRootserApp.controller('loginController', function($scope) {
 	$scope.message = 'Look! I am the login page.';
+	$scope.loginPreSubmit = function(){
+		console.log('login pre submit');
+		passwdHash = sha256_digest($('#inputPassword').val());
+		$('#inputPassword').val(passwdHash);
+	};
 });
 
 blueRootserApp.controller('helpController', function($scope) {
@@ -137,9 +142,9 @@ blueRootserApp.controller('signupController', function($scope, $http, $location)
 		postObject.firstName = $('#inputFirstName').val();
 		postObject.lastName = $('#inputLastName').val();
 		postObject.dob = $('#inputDob').val();
-		postObject.newPassword = $('#inputNewPassword').val();
-		postObject.newPassword2 = $('#inputNewPassword2').val();
-		postObject.password = $('#inputNewPassword').val();
+		postObject.newPassword = sha256_digest($('#inputNewPassword').val());
+		postObject.newPassword2 = sha256_digest($('#inputNewPassword2').val());
+		postObject.password = sha256_digest($('#inputNewPassword').val());
 		
 		resetForm(postObject);
 		updateUser('/createUser', postObject, $http, $location, $scope, '/login');
@@ -251,9 +256,9 @@ blueRootserApp.controller('myAreaController', function($scope, $http, $location)
 		postObject.firstName = $('#inputFirstName').val();
 		postObject.lastName = $('#inputLastName').val();
 		postObject.dob = $('#inputDob').val();
-		postObject.newPassword = $('#inputNewPassword').val();
-		postObject.newPassword2 = $('#inputNewPassword2').val();
-		postObject.password = $('#inputPassword').val();
+		postObject.newPassword = sha256_digest($('#inputNewPassword').val());
+		postObject.newPassword2 = sha256_digest($('#inputNewPassword2').val());
+		postObject.password = sha256_digest($('#inputPassword').val());
 
 		console.log(postObject);
 

@@ -36,6 +36,7 @@
 <script src="<c:url value="/resources/javascript/app/Zhongwen/dict.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/Zhongwen/main.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/Zhongwen/background.js" />"></script>
+<script src="<c:url value="/resources/javascript/app/sha256.js" />"></script>
 <script src="<c:url value="/resources/javascript/app/blueRootserApp.js" />"></script>
 
 <meta name="description" content="chinese reading system">
