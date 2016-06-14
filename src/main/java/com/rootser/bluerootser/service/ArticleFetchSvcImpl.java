@@ -60,6 +60,7 @@ public class ArticleFetchSvcImpl implements ArticleFetchSvc {
 	private Document fixRelativeUrls(Document articleDoc, String tagSelector, String baseUrl) {
 		Document articleHtmlDoc = Jsoup.parse(articleDoc.select(tagSelector).html());
 		for (Element imgElt : articleHtmlDoc.select("img")){
+			logger.debug(imgElt.absUrl("src"));
 			if (imgElt.absUrl("src").trim().startsWith("/")){
 				imgElt.setBaseUri(baseUrl);
 			}
